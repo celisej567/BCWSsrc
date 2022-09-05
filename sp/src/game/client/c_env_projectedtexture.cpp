@@ -639,7 +639,7 @@ void C_EnvProjectedTexture::UpdateLight()
 	{
 #endif
 	Vector vForward, vRight, vUp, vPos = GetAbsOrigin();
-	FlashlightState_t state;
+	FlashlightState_t state;	
 	state.m_flShadowFilterSize = mat_ptfilter.GetFloat();
 
 	if ( m_hTargetEntity != NULL )
