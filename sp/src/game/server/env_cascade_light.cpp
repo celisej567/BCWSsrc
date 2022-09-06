@@ -7,9 +7,12 @@
 #include "cbase.h"
 #include "shareddefs.h"
 #include "lights.h"
+#include "tier1/utlstring.h"
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
+
+
 
 #define ENV_CASCADE_STARTON			(1<<0)
 
@@ -383,17 +386,18 @@ void CEnvCascadeLight::Preparation()
 	CBaseEntity* CSMSecond = NULL;
 	
 	CSMOrigin = gEntList.FindEntityByClassname(CSMOrigin, "csmorigin");
+	CSMSecond = gEntList.FindEntityByClassname(CSMSecond, "second_csm");
 	//if origin is exist
 	if (CSMOrigin)
 	{
 
 		pEnv = dynamic_cast<CLightOrigin*>(CSMOrigin);
-
-
-		CSMSecond = gEntList.FindEntityByClassname(CSMSecond, "second_csm");
 		//if second csm is exist
 		if (CSMSecond)
 		{
+			//if (GetBaseEntity()->GetEntityNameAsCStr() != NULL)
+				//CSMSecond->SetNameAsCStr(GetBaseEntity()->GetEntityNameAsCStr() + '_' + 's' + 'e' + 'c' + 'o' + 'n' + 'd');
+
 			SecondCSM = dynamic_cast<CEnvCascadeLightSecond*>(CSMSecond);	
 			SecondCSM->SetAbsAngles(GetAbsAngles());
 			SecondCSM->SetAbsOrigin(GetAbsOrigin());
@@ -422,7 +426,15 @@ void CEnvCascadeLight::Preparation()
 			SetLocalAngles(QAngle(90, 0, 0));
 			DevMsg("CSM using light_environment \n");
 		}
-		//DispatchSpawn(CSMSecond);
+
+		//const char* bebra = GetBaseEntity()->GetEntityNameAsCStr();
+		//bebra += '_' + 'o' + 'r' + 'i' + 'g' + 'i' + 'n';
+		
+		//CSMOrigin->SetNameAsCStr(bebra);
+		
+		//ConColorMsg(Color(255,0,0), "CSMOrigin name is " + bebra);
+		
+
 		DispatchSpawn(CSMOrigin);
 	}
 	else

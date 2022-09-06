@@ -68,7 +68,7 @@ void C_LightOrigin::Simulate()
 	BaseClass::Simulate();
 }
 
-ConVar bebra("csm_filter", "1");
+ConVar bebra("csm_filter", "2");
 
 //-----------------------------------------------------------------------------
 // Purpose: main csm code	
