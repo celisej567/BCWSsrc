@@ -415,14 +415,11 @@ void CEnvCascadeLight::Preparation()
 		{
 			pEnv->angFEnv = true;
 			SetLocalAngles(QAngle(90, 0, 0));
-			
 		}
 		else
 		{
 			pEnv->SetAbsAngles(QAngle((GetLocalAngles().x - 90), GetLocalAngles().y, -GetLocalAngles().z));
-
-			Msg("pEnv local angle = %f %f %f \n", pEnv->GetLocalAngles().x, pEnv->GetLocalAngles().y, pEnv->GetLocalAngles().z);
-
+			//Msg("pEnv local angle = %f %f %f \n", pEnv->GetLocalAngles().x, pEnv->GetLocalAngles().y, pEnv->GetLocalAngles().z);
 			SetLocalAngles(QAngle(90, 0, 0));
 			DevMsg("CSM using light_environment \n");
 		}
