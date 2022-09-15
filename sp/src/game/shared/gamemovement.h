@@ -280,6 +280,8 @@ protected:
 
 	float			m_fFrameTime;
 
+
+
 //private:
 	int				m_iSpeedCropped;
 

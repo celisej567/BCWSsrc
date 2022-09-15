@@ -1968,17 +1968,18 @@ void CGameMovement::WalkMove( void )
 
 		}
 
-		if (mv->m_flSideMove > 0)
+		if (smove > 0)
 		{
 			float zoffset = 2.5 * player->GetAbsVelocity().Length() * cl_viewbob_zscale.GetFloat() / cl_viewbob_zoffset.GetFloat();
 			player->ViewPunch(QAngle(0, 0, zoffset));
 		}
-		else if (mv->m_flSideMove < 0)
+		else if (smove < 0)
 		{
 			float zoffset = 2.5 * player->GetAbsVelocity().Length() * cl_viewbob_zscale.GetFloat() / cl_viewbob_zoffset.GetFloat();
 			player->ViewPunch(QAngle(0, 0, -zoffset));
 		}
-
+	
+		
 
 	}
 

@@ -45,7 +45,7 @@ private:
 LINK_ENTITY_TO_CLASS(csmorigin, CLightOrigin);
 
 BEGIN_DATADESC(CLightOrigin)
-//DEFINE_FIELD(LightEnvVector, FIELD_VECTOR),
+DEFINE_FIELD(LightEnvVector, FIELD_VECTOR),
 DEFINE_THINKFUNC(InitialThink)
 END_DATADESC()
 
