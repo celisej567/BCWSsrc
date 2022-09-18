@@ -585,7 +585,7 @@ void C_EnvCascadeLightSecond::UpdateLight(bool bForceUpdate)
 	state.m_nShadowQuality = m_nShadowQuality; // Allow entity to affect shadow quality
 	
 #ifdef MAPBASE
-
+	/*
 	state.m_bOrtho = csm_ortho.GetBool();
 	if(state.m_bOrtho)
 	{
@@ -599,7 +599,7 @@ void C_EnvCascadeLightSecond::UpdateLight(bool bForceUpdate)
 		state.m_fLinearAtten = ConVarRef("csm_current_distance").GetInt() * 2;
 		state.m_FarZAtten = ConVarRef("csm_current_distance").GetInt() * 2;
 	}
-	
+	*/
 #endif
 
 	if (m_LightHandle == CLIENTSHADOW_INVALID_HANDLE)
