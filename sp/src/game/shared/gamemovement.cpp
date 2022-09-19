@@ -17,6 +17,8 @@
 #include "hl2/hl2_player_shared.h"
 #include "util_shared.h"
 
+
+
 #if defined(HL2_DLL) || defined(HL2_CLIENT_DLL)
 	#include "hl_movedata.h"
 #endif
@@ -73,13 +75,15 @@ bool g_bMovementOptimizations = true;
 //cam shake
 ConVar cl_viewbob_enabled("cl_viewbob_enabled", "1", 0, "Oscillation Toggle");
 ConVar cl_viewbob_enabled_z("cl_viewbob_enabled_z", "1");
-ConVar cl_dynamic_fov("cl_dynamic_fov", "0");
+//ConVar cl_dynamic_fov("cl_dynamic_fov", "0");
+
+//ConVar cl_viewbob_transform("cl_viewbob_transform", "0");
 
 ConVar cl_viewbob_drop_xscale("cl_viewbob_drop_xscale", "1");
 ConVar cl_viewbob_drop_yscale("cl_viewbob_drop_yscale", "1");
 
-ConVar cl_dynamic_fov_offset("cl_dynamic_fov_offset", "50");
-ConVar cl_dynamic_fov_timer("cl_dynamic_fov_timer", "2");
+//ConVar cl_dynamic_fov_offset("cl_dynamic_fov_offset", "50");
+//ConVar cl_dynamic_fov_timer("cl_dynamic_fov_timer", "2");
 
 ConVar cl_viewbob_xtimer("cl_viewbob_xtimer", "10", 0, "Speed of Oscillation");
 ConVar cl_viewbob_ytimer("cl_viewbob_ytimer", "2.5", 0, "Speed of Oscillation");
@@ -87,7 +91,7 @@ ConVar cl_viewbob_ztimer("cl_viewbob_ztimer", "5", 0, "Speed of Oscillation");
 
 ConVar cl_viewbob_xscale("cl_viewbob_xscale", "0.01", 0, "Magnitude of Oscillation");
 ConVar cl_viewbob_yscale("cl_viewbob_yscale", "0.01", 0, "Magnitude of Oscillation");
-ConVar cl_viewbob_zscale("cl_viewbob_zscale", "0.01", 0, "Magnitude of Oscillation");
+ConVar cl_viewbob_zscale("cl_viewbob_zscale", "0.02", 0, "Magnitude of Oscillation");
 
 ConVar cl_viewbob_xoffset("cl_viewbob_xoffset", "100", 0, "Division xoffset");
 ConVar cl_viewbob_yoffset("cl_viewbob_yoffset", "100", 0, "Division xoffset");
@@ -1979,7 +1983,6 @@ void CGameMovement::WalkMove( void )
 			player->ViewPunch(QAngle(0, 0, -zoffset));
 		}
 	
-		
 
 	}
 

@@ -632,7 +632,7 @@ void CBasePlayer::CreateHandModel(int index, int iOtherVm)
 	if (GetViewModel(index))
 		return;
 
-	CBaseViewModel *vm = (CBaseViewModel *)CreateEntityByName("hand_viewmodel");
+	CBaseViewModel *vm = (CBaseViewModel *)CreateEntityByName("camera_viewmodel");
 	if (vm)
 	{
 		vm->SetAbsOrigin(GetAbsOrigin());
@@ -5220,6 +5220,7 @@ void CBasePlayer::Spawn( void )
 #ifdef MAPBASE
 	CreateHandModel();
 #endif
+
 
 	SetCollisionGroup( COLLISION_GROUP_PLAYER );
 

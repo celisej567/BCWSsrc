@@ -676,6 +676,7 @@ void CHL2_Player::Precache( void )
 	PrecacheScriptSound( "HL2Player.TrainUse" );
 	PrecacheScriptSound( "HL2Player.Use" );
 	PrecacheScriptSound( "HL2Player.BurnPain" );
+	PrecacheModel("models/camera_anims.mdl");
 }
 
 //-----------------------------------------------------------------------------
@@ -1591,6 +1592,8 @@ void CHL2_Player::Spawn(void)
 	GetPlayerProxy();
 
 	SetFlashlightPowerDrainScale( 1.0f );
+	
+	//GetViewModel(1)->SetModel("models/camera_anims.mdl");
 }
 
 //-----------------------------------------------------------------------------

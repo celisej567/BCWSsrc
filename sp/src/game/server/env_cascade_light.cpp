@@ -21,6 +21,7 @@ static ConVar curdist("csm_current_distance","14000", 0, "Current Z distance. Yo
 static ConVar defFOV("csm_default_fov","15", FCVAR_DEVELOPMENTONLY, "Default FOV. Used for some fov calculations. Please dont change");
 static ConVar curFOV("csm_current_fov","15", 0, "Current FOV. You can change it");
 static ConVar csm_second_fov("csm_second_fov", "26", FCVAR_NONE ,"FOV of the second csm.");
+ConVar csm_enable("csm_enable", "1");
 
 class CLightOrigin : public CPointEntity
 {
@@ -174,7 +175,7 @@ CEnvCascadeLightSecond::CEnvCascadeLightSecond(void)
 #else
 	m_LightColor.Init(255, 255, 255, 1);
 #endif
-	m_bState = true;
+	m_bState = csm_enable.GetBool();
 	m_flLightFOV = 45.0f;
 	m_bEnableShadows = true;
 	m_bLightOnlyTarget = false;
@@ -235,6 +236,7 @@ void CEnvCascadeLightSecond::Activate(void)
 
 void CEnvCascadeLightSecond::InitialThink(void)
 {
+	m_bState = csm_enable.GetBool();
 	float bibigon = defdist.GetFloat() / curdist.GetFloat();
 	m_flLightFOV = csm_second_fov.GetFloat() * bibigon;
 	m_hTargetEntity = gEntList.FindEntityByName(NULL, m_target);
@@ -369,7 +371,7 @@ CEnvCascadeLight::CEnvCascadeLight(void)
 #else
 	m_LightColor.Init(255, 255, 255, 1);
 #endif
-	m_bState = true;
+	m_bState = csm_enable.GetBool();
 	m_flLightFOV = 45.0f;
 	m_bEnableShadows = true;
 	m_bLightOnlyTarget = false;
@@ -534,6 +536,7 @@ void CEnvCascadeLight::Activate(void)
 
 void CEnvCascadeLight::InitialThink(void)
 {
+	m_bState = csm_enable.GetBool();
 	m_hTargetEntity = gEntList.FindEntityByName(NULL, m_target);
 	float bibigon = defdist.GetFloat() / curdist.GetFloat();
 	curFOV.SetValue(defFOV.GetFloat() * bibigon);

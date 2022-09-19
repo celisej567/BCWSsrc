@@ -699,18 +699,15 @@ bool CBaseViewModel::GetAttachmentVelocity( int number, Vector &originVel, Quate
 // ---------------------------------------
 class CHandViewModel : public CBaseViewModel
 {
-	DECLARE_CLASS( CHandViewModel, CBaseViewModel );
+	DECLARE_CLASS(CHandViewModel, CBaseViewModel );
 public:
 	DECLARE_NETWORKCLASS();
 private:
 };
 
-LINK_ENTITY_TO_CLASS(hand_viewmodel, CHandViewModel);
+LINK_ENTITY_TO_CLASS(camera_viewmodel, CHandViewModel);
 IMPLEMENT_NETWORKCLASS_ALIASED(HandViewModel, DT_HandViewModel)
 
-// for whatever reason the parent doesn't get sent 
-// I don't really want to mess with the baseviewmodel
-// so now it does
 BEGIN_NETWORK_TABLE(CHandViewModel, DT_HandViewModel)
 #ifndef CLIENT_DLL
 	SendPropEHandle(SENDINFO_NAME(m_hMoveParent, moveparent)),
