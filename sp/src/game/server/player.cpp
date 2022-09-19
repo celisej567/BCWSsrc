@@ -582,27 +582,6 @@ CBaseViewModel *CBasePlayer::GetViewModel( int index /*= 0*/, bool bObserverOK )
 	return m_hViewModel[ index ].Get();
 }
 
-//-----------------------------------------------------------------------------
-// Purpose: 
-//-----------------------------------------------------------------------------
-void CBasePlayer::CreateViewModel( int index /*=0*/ )
-{
-	Assert( index >= 0 && index < MAX_VIEWMODELS );
-
-	if ( GetViewModel( index ) )
-		return;
-
-	CBaseViewModel *vm = ( CBaseViewModel * )CreateEntityByName( "viewmodel" );
-	if ( vm )
-	{
-		vm->SetAbsOrigin( GetAbsOrigin() );
-		vm->SetOwner( this );
-		vm->SetIndex( index );
-		DispatchSpawn( vm );
-		vm->FollowEntity( this );
-		m_hViewModel.Set( index, vm );
-	}
-}
 
 //-----------------------------------------------------------------------------
 // Purpose: 
@@ -621,29 +600,6 @@ void CBasePlayer::DestroyViewModels( void )
 	}
 }
 
-#ifdef MAPBASE
-//-----------------------------------------------------------------------------
-// Purpose: 
-//-----------------------------------------------------------------------------
-void CBasePlayer::CreateHandModel(int index, int iOtherVm)
-{
-	Assert(index >= 0 && index < MAX_VIEWMODELS && iOtherVm >= 0 && iOtherVm < MAX_VIEWMODELS );
-
-	if (GetViewModel(index))
-		return;
-
-	CBaseViewModel *vm = (CBaseViewModel *)CreateEntityByName("camera_viewmodel");
-	if (vm)
-	{
-		vm->SetAbsOrigin(GetAbsOrigin());
-		vm->SetOwner(this);
-		vm->SetIndex(index);
-		DispatchSpawn(vm);
-		vm->FollowEntity(GetViewModel(iOtherVm), true);
-		m_hViewModel.Set(index, vm);
-	}
-}
-#endif
 
 //-----------------------------------------------------------------------------
 // Purpose: Static member function to create a player of the specified class
@@ -5216,6 +5172,7 @@ void CBasePlayer::Spawn( void )
 	CSingleUserRecipientFilter user( this );
 	enginesound->SetPlayerDSP( user, 0, false );
 
+
 	CreateViewModel();
 #ifdef MAPBASE
 	CreateHandModel();
@@ -7674,6 +7631,52 @@ void CBasePlayer::Weapon_Drop( CBaseCombatWeapon *pWeapon, const Vector *pvecTar
 		}
 	}
 }
+
+//-----------------------------------------------------------------------------
+// Purpose: 
+//-----------------------------------------------------------------------------
+void CBasePlayer::CreateViewModel(int index /*=0*/)
+{
+	Assert(index >= 0 && index < MAX_VIEWMODELS);
+
+	if (GetViewModel(index))
+		return;
+
+	CBaseViewModel* vm = (CBaseViewModel*)CreateEntityByName("viewmodel");
+	if (vm)
+	{
+		vm->SetAbsOrigin(GetAbsOrigin());
+		vm->SetOwner(this);
+		vm->SetIndex(index);
+		DispatchSpawn(vm);
+		vm->FollowEntity(this);
+		m_hViewModel.Set(index, vm);
+	}
+}
+
+#ifdef MAPBASE
+//-----------------------------------------------------------------------------
+// Purpose: 
+//-----------------------------------------------------------------------------
+void CBasePlayer::CreateHandModel(int index, int iOtherVm)
+{
+	Assert(index >= 0 && index < MAX_VIEWMODELS&& iOtherVm >= 0 && iOtherVm < MAX_VIEWMODELS);
+
+	if (GetViewModel(index))
+		return;
+
+	CBaseViewModel* vm = (CBaseViewModel*)CreateEntityByName("camera_viewmodel");
+	if (vm)
+	{
+		vm->SetAbsOrigin(GetAbsOrigin());
+		vm->SetOwner(this);
+		vm->SetIndex(index);
+		DispatchSpawn(vm);
+		vm->FollowEntity(GetViewModel(iOtherVm), true);
+		m_hViewModel.Set(index, vm);
+	}
+}
+#endif
 
 //-----------------------------------------------------------------------------
 // Purpose: 

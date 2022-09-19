@@ -267,8 +267,9 @@ public:
 	void					DestroyViewModels( void );
 
 #ifdef MAPBASE
-	virtual void			CreateHandModel( int viewmodelindex = 1, int iOtherVm = 0 );
-#endif
+	virtual void	        CreateHandModel(int viewmodelindex = 1, int iOtherVm = 0);
+#endif // MAPBASE
+
 
 	CPlayerState			*PlayerData( void ) { return &pl; }
 	
