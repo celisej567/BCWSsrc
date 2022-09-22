@@ -422,22 +422,10 @@ struct FlashlightState_t
 	{
 		m_bEnableShadows = false;						// Provide reasonable defaults for shadow depth mapping parameters
 		m_bDrawShadowFrustum = false;
-#ifdef ASW_PROJECTED_TEXTURES
 		m_flShadowMapResolution = 2048.0f;
-		m_flShadowFilterSize = 0.5f;
+		m_flShadowFilterSize = 5;
 		m_flShadowSlopeScaleDepthBias = 16.0f;
 		m_flShadowDepthBias = 0.0005f;
-#elif defined(MAPBASE)
-		m_flShadowMapResolution = 2048;
-		m_flShadowFilterSize = 1.0f;
-		m_flShadowSlopeScaleDepthBias = 4.0f;
-		m_flShadowDepthBias = 0.00001f;
-#else
-		m_flShadowMapResolution = 1024.0f;
-		m_flShadowFilterSize = 3.0f;
-		m_flShadowSlopeScaleDepthBias = 16.0f;
-		m_flShadowDepthBias = 0.0005f;
-#endif
 		m_flShadowJitterSeed = 0.0f;
 		m_flShadowAtten = 0.0f;
 		m_bScissor = false; 

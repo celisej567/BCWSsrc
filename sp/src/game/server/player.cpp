@@ -5175,7 +5175,7 @@ void CBasePlayer::Spawn( void )
 
 	CreateViewModel();
 #ifdef MAPBASE
-	CreateHandModel();
+	//CreateHandModel();
 #endif
 
 

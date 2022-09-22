@@ -24,8 +24,8 @@
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
 
-const char* ptfilter = CommandLine()->ParmValue("-ptfilter", "0.5");
-ConVar mat_ptfilter("mat_ptfilter", ptfilter);
+//const char* ptfilter = CommandLine()->ParmValue("-ptfilter", "0.5");
+ConVar r_flashlightfilter("r_flashlightfilter", "1");
 
 #ifdef ASW_PROJECTED_TEXTURES
 static ConVar mat_slopescaledepthbias_shadowmap( "mat_slopescaledepthbias_shadowmap", "16", FCVAR_CHEAT );
@@ -231,11 +231,11 @@ void C_EnvProjectedTexture::UpdateLight( void )
 		return;
 	}
 
-	if ( m_LightHandle == CLIENTSHADOW_INVALID_HANDLE || m_hTargetEntity != NULL || m_bForceUpdate )
+	if ( m_LightHandle == CLIENTSHADOW_INVALID_HANDLE || m_hTargetEntity != NULL)
 	{
 		Vector vForward, vRight, vUp, vPos = GetAbsOrigin();
 		FlashlightState_t state;
-		state.m_flShadowFilterSize = mat_ptfilter.GetFloat();
+		state.m_flShadowFilterSize = r_flashlightfilter.GetFloat();
 
 #ifdef MAPBASE
 		if ( m_hTargetEntity != NULL && !m_bDontFollowTarget )
@@ -635,12 +635,12 @@ void C_EnvProjectedTexture::UpdateLight()
 #endif
 
 #ifdef MAPBASE
-	if ( m_LightHandle == CLIENTSHADOW_INVALID_HANDLE || m_hTargetEntity != NULL || m_bForceUpdate )
+	if ( m_LightHandle == CLIENTSHADOW_INVALID_HANDLE || m_hTargetEntity != NULL)
 	{
 #endif
 	Vector vForward, vRight, vUp, vPos = GetAbsOrigin();
 	FlashlightState_t state;	
-	state.m_flShadowFilterSize = mat_ptfilter.GetFloat();
+	state.m_flShadowFilterSize = r_flashlightfilter.GetFloat();
 
 	if ( m_hTargetEntity != NULL )
 	{
