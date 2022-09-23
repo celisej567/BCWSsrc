@@ -9,7 +9,10 @@
 #define DISPCOLL_COMMON_H
 #pragma once
 
+#ifndef VRAD
 #include "eifacev21.h"
+#endif // !VRAD
+
 #include "trace.h"
 #include "builddisp.h"
 #include "bitvec.h"
