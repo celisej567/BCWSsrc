@@ -63,6 +63,7 @@ IMPLEMENT_CLIENTCLASS_DT( C_EnvProjectedTexture, DT_EnvProjectedTexture, CEnvPro
 	RecvPropFloat(	 RECVINFO( m_flLinearAtten ) ),
 	RecvPropFloat(	 RECVINFO( m_flQuadraticAtten ) ),
 	RecvPropFloat(	 RECVINFO( m_flShadowAtten ) ),
+	RecvPropFloat(   RECVINFO( m_flShadowFilter )  ),
 	RecvPropBool(	 RECVINFO( m_bAlwaysDraw )	),
 
 	// Not needed on the client right now, change when it actually is needed
@@ -100,6 +101,7 @@ C_EnvProjectedTexture *C_EnvProjectedTexture::Create( )
 	pEnt->m_flLinearAtten = 100.0f;
 	pEnt->m_flQuadraticAtten = 0.0f;
 	pEnt->m_flShadowAtten = 0.0f;
+	pEnt->m_flShadowFilter = 0.3f;
 	//pEnt->m_bProjectedTextureVersion = 1;
 #endif
 
@@ -235,7 +237,7 @@ void C_EnvProjectedTexture::UpdateLight( void )
 	{
 		Vector vForward, vRight, vUp, vPos = GetAbsOrigin();
 		FlashlightState_t state;
-		state.m_flShadowFilterSize = r_flashlightfilter.GetFloat();
+		state.m_flShadowFilterSize = m_flShadowFilter;
 
 #ifdef MAPBASE
 		if ( m_hTargetEntity != NULL && !m_bDontFollowTarget )

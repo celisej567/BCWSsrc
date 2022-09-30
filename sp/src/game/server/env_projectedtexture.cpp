@@ -50,6 +50,7 @@ BEGIN_DATADESC( CEnvProjectedTexture )
 	DEFINE_FIELD( m_flLinearAtten, FIELD_FLOAT ),
 	DEFINE_FIELD( m_flQuadraticAtten, FIELD_FLOAT ),
 	DEFINE_KEYFIELD( m_flShadowAtten, FIELD_FLOAT, "shadowatten" ),
+	DEFINE_KEYFIELD(m_flShadowFilter, FIELD_FLOAT, "shadowfilter"),
 #endif
 
 	DEFINE_INPUTFUNC( FIELD_VOID, "TurnOn", InputTurnOn ),
@@ -68,6 +69,7 @@ BEGIN_DATADESC( CEnvProjectedTexture )
 	DEFINE_INPUTFUNC( FIELD_BOOLEAN, "EnableShadows", InputSetEnableShadows ),
 	DEFINE_INPUTFUNC( FIELD_COLOR32, "LightColor", InputSetLightColor ),
 	DEFINE_INPUTFUNC( FIELD_FLOAT, "Ambient", InputSetAmbient ),
+	
 	DEFINE_INPUTFUNC( FIELD_STRING, "SpotlightTexture", InputSetSpotlightTexture ),
 #ifdef MAPBASE
 	DEFINE_INPUTFUNC( FIELD_INTEGER, "SetSpotlightFrame", InputSetSpotlightFrame ),
@@ -77,6 +79,7 @@ BEGIN_DATADESC( CEnvProjectedTexture )
 	DEFINE_INPUTFUNC( FIELD_FLOAT, "SetLinear", InputSetLinear ),
 	DEFINE_INPUTFUNC( FIELD_FLOAT, "SetConstant", InputSetConstant ),
 	DEFINE_INPUTFUNC( FIELD_FLOAT, "SetShadowAtten", InputSetShadowAtten ),
+	DEFINE_INPUTFUNC(FIELD_FLOAT, "SetFilter", InputSetFilter),
 	DEFINE_INPUTFUNC( FIELD_FLOAT, "SetNearZ", InputSetNearZ ),
 	DEFINE_INPUTFUNC( FIELD_FLOAT, "SetFarZ", InputSetFarZ ),
 	DEFINE_INPUTFUNC( FIELD_VOID, "AlwaysDrawOn", InputAlwaysDrawOn ),
@@ -116,6 +119,7 @@ IMPLEMENT_SERVERCLASS_ST( CEnvProjectedTexture, DT_EnvProjectedTexture )
 	SendPropFloat( SENDINFO( m_flLinearAtten ) ),
 	SendPropFloat( SENDINFO( m_flQuadraticAtten ) ),
 	SendPropFloat( SENDINFO( m_flShadowAtten ) ),
+	SendPropFloat(SENDINFO(m_flShadowFilter)),
 	SendPropBool( SENDINFO( m_bAlwaysDraw ) ),
 
 	// Not needed on the client right now, change when it actually is needed
@@ -158,6 +162,7 @@ CEnvProjectedTexture::CEnvProjectedTexture( void )
 	m_flLinearAtten = 100.0f;
 	m_flConstantAtten = 0.0f;
 	m_flShadowAtten = 0.0f;
+	m_flShadowFilter = 0.3f;
 #endif
 }
 
@@ -316,6 +321,12 @@ void CEnvProjectedTexture::InputSetHorFOV( inputdata_t &inputdata )
 {
 	m_flLightHorFOV = inputdata.value.Float();
 }
+
+void CEnvProjectedTexture::InputSetFilter(inputdata_t& inputdata)
+{
+	m_flShadowFilter = inputdata.value.Float();
+}
+
 #endif
 
 void CEnvProjectedTexture::InputSetTarget( inputdata_t &inputdata )
