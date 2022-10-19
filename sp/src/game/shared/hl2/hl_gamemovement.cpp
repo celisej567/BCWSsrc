@@ -65,6 +65,7 @@ void CHL2GameMovement::SwallowUseKey()
 	GetHL2Player()->m_bPlayUseDenySound = false;
 }
 
+
 #if !defined( CLIENT_DLL )
 // This is a simple helper class to reserver a player sized hull at a spot, owned by the current player so that nothing
 //  can move into this spot and cause us to get stuck when we get there

@@ -86,6 +86,7 @@ private:
 
 	void		SetLadder( CFuncLadder *ladder );
 	CFuncLadder *GetLadder();
+
 };
 
 

@@ -82,7 +82,7 @@
 #include "C_Env_Projected_Texture.h"
 
 //Shader Editor
-#include "ShaderEditor/ShaderEditorSystem.h"
+//#include "ShaderEditor/ShaderEditorSystem.h"
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
@@ -1400,7 +1400,7 @@ void CViewRender::ViewDrawScene( bool bDrew3dSkybox, SkyboxVisibility_t nSkyboxV
 	render->GetVisibleFogVolume(view.origin, &fogVolumeInfo);
 	WaterRenderInfo_t info;
 	DetermineWaterRenderInfo(fogVolumeInfo, info);
-	g_ShaderEditorSystem->CustomViewRender(&g_CurrentViewID, fogVolumeInfo, info);
+	//g_ShaderEditorSystem->CustomViewRender(&g_CurrentViewID, fogVolumeInfo, info);
 
 	DrawWorldAndEntities( drawSkybox, view, nClearFlags, pCustomVisibility );
 
@@ -2052,7 +2052,7 @@ void CViewRender::RenderView( const CViewSetup &view, int nClearFlags, int whatT
 		if ( ( bDrew3dSkybox = pSkyView->Setup( view, &nClearFlags, &nSkyboxVisible ) ) != false )
 		{
 			AddViewToScene( pSkyView );
-			g_ShaderEditorSystem->UpdateSkymask(false, view.x , view.y, view.width, view.height);
+			//g_ShaderEditorSystem->UpdateSkymask(false, view.x , view.y, view.width, view.height);
 		}
 		SafeRelease( pSkyView );
 //#endif
@@ -2147,7 +2147,7 @@ void CViewRender::RenderView( const CViewSetup &view, int nClearFlags, int whatT
 #endif
 		DrawViewModels( view, whatToDraw & RENDERVIEW_DRAWVIEWMODEL );
 		
-		g_ShaderEditorSystem->UpdateSkymask(bDrew3dSkybox, view.x, view.y, view.width, view.height);
+		//g_ShaderEditorSystem->UpdateSkymask(bDrew3dSkybox, view.x, view.y, view.width, view.height);
 
 		DrawUnderwaterOverlay();
 
@@ -2186,7 +2186,7 @@ void CViewRender::RenderView( const CViewSetup &view, int nClearFlags, int whatT
 			pRenderContext.SafeRelease();
 		}
 
-		g_ShaderEditorSystem->CustomPostRender();
+		//g_ShaderEditorSystem->CustomPostRender();
 
 		// And here are the screen-space effects
 

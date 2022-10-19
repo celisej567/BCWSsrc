@@ -89,6 +89,8 @@ ConVar cl_viewbob_xtimer("cl_viewbob_xtimer", "10", 0, "Speed of Oscillation");
 ConVar cl_viewbob_ytimer("cl_viewbob_ytimer", "2.5", 0, "Speed of Oscillation");
 ConVar cl_viewbob_ztimer("cl_viewbob_ztimer", "5", 0, "Speed of Oscillation");
 
+ConVar cl_viewbob_onland_force("cl_viewbob_onland_force", "0.01");
+
 ConVar cl_viewbob_xscale("cl_viewbob_xscale", "0.01", 0, "Magnitude of Oscillation");
 ConVar cl_viewbob_yscale("cl_viewbob_yscale", "0.01", 0, "Magnitude of Oscillation");
 ConVar cl_viewbob_zscale("cl_viewbob_zscale", "0.02", 0, "Magnitude of Oscillation");
@@ -2091,6 +2093,13 @@ void CGameMovement::WalkMove( void )
 
 
 }
+
+void CGameMovement::OnLand(float fVelocity)
+{
+	player->ViewPunch(QAngle(fVelocity * cl_viewbob_onland_force.GetFloat(), 0, 0));
+	//Log("!!!!!!!!!!!!!!!!!!!!!!!! %f /n", fVelocity);
+}
+
 
 //-----------------------------------------------------------------------------
 // Purpose: 
