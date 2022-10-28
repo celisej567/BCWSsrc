@@ -24,12 +24,7 @@
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
 
-//const char* ptfilter = CommandLine()->ParmValue("-ptfilter", "0.5");
-ConVar r_flashlightfilter("r_flashlightfilter", "1");
-
 #ifdef ASW_PROJECTED_TEXTURES
-static ConVar mat_slopescaledepthbias_shadowmap( "mat_slopescaledepthbias_shadowmap", "16", FCVAR_CHEAT );
-static ConVar mat_depthbias_shadowmap(	"mat_depthbias_shadowmap", "0.00001", FCVAR_CHEAT  );
 
 float C_EnvProjectedTexture::m_flVisibleBBoxMinHeight = -FLT_MAX;
 
@@ -63,7 +58,7 @@ IMPLEMENT_CLIENTCLASS_DT( C_EnvProjectedTexture, DT_EnvProjectedTexture, CEnvPro
 	RecvPropFloat(	 RECVINFO( m_flLinearAtten ) ),
 	RecvPropFloat(	 RECVINFO( m_flQuadraticAtten ) ),
 	RecvPropFloat(	 RECVINFO( m_flShadowAtten ) ),
-	RecvPropFloat(   RECVINFO( m_flShadowFilter )  ),
+	RecvPropFloat(RECVINFO(m_flShadowFilter)),
 	RecvPropBool(	 RECVINFO( m_bAlwaysDraw )	),
 
 	// Not needed on the client right now, change when it actually is needed
@@ -101,7 +96,7 @@ C_EnvProjectedTexture *C_EnvProjectedTexture::Create( )
 	pEnt->m_flLinearAtten = 100.0f;
 	pEnt->m_flQuadraticAtten = 0.0f;
 	pEnt->m_flShadowAtten = 0.0f;
-	pEnt->m_flShadowFilter = 0.3f;
+	pEnt->m_flShadowFilter = 0.5f;
 	//pEnt->m_bProjectedTextureVersion = 1;
 #endif
 
@@ -233,11 +228,10 @@ void C_EnvProjectedTexture::UpdateLight( void )
 		return;
 	}
 
-	if ( m_LightHandle == CLIENTSHADOW_INVALID_HANDLE || m_hTargetEntity != NULL)
+	if ( m_LightHandle == CLIENTSHADOW_INVALID_HANDLE || m_hTargetEntity != NULL || m_bForceUpdate )
 	{
 		Vector vForward, vRight, vUp, vPos = GetAbsOrigin();
 		FlashlightState_t state;
-		state.m_flShadowFilterSize = m_flShadowFilter;
 
 #ifdef MAPBASE
 		if ( m_hTargetEntity != NULL && !m_bDontFollowTarget )
@@ -289,6 +283,8 @@ void C_EnvProjectedTexture::UpdateLight( void )
 
 				//			VectorNormalize( vRight );
 				//			VectorNormalize( vUp );
+
+				VectorVectors( vForward, vRight, vUp );
 			}
 		}
 		else
@@ -404,9 +400,10 @@ void C_EnvProjectedTexture::UpdateLight( void )
 		state.m_Color[1] = (m_CurrentLinearFloatLightColor.y * ( 1.0f / 255.0f ) * flAlpha) * m_flCurrentBrightnessScale;
 		state.m_Color[2] = (m_CurrentLinearFloatLightColor.z * ( 1.0f / 255.0f ) * flAlpha) * m_flCurrentBrightnessScale;
 		state.m_Color[3] = 0.0f; // fixme: need to make ambient work m_flAmbient;
-		state.m_flShadowSlopeScaleDepthBias = mat_slopescaledepthbias_shadowmap.GetFloat();
-		state.m_flShadowDepthBias = mat_depthbias_shadowmap.GetFloat();
+		state.m_flShadowSlopeScaleDepthBias = ConVarRef("mat_slopescaledepthbias_shadowmap").GetFloat();
+		state.m_flShadowDepthBias = ConVarRef("mat_depthbias_shadowmap").GetFloat();
 		state.m_flShadowAtten = m_flShadowAtten;
+		state.m_flShadowFilterSize = m_flShadowFilter;
 #else
 		state.m_fQuadraticAtten = 0.0;
 		state.m_fLinearAtten = 100;
@@ -491,14 +488,6 @@ bool C_EnvProjectedTexture::IsBBoxVisible( Vector vecExtentsMin, Vector vecExten
 }
 
 #else
-
-#ifndef MAPBASE
-static ConVar mat_slopescaledepthbias_shadowmap( "mat_slopescaledepthbias_shadowmap", "16", FCVAR_CHEAT );
-static ConVar mat_depthbias_shadowmap(	"mat_depthbias_shadowmap", "0.0005", FCVAR_CHEAT  );
-#else
-static ConVar mat_slopescaledepthbias_shadowmap( "mat_slopescaledepthbias_shadowmap", "4", FCVAR_CHEAT );
-static ConVar mat_depthbias_shadowmap(	"mat_depthbias_shadowmap", "0.0001", FCVAR_CHEAT  );
-#endif
 
 //-----------------------------------------------------------------------------
 // Purpose: 
@@ -637,12 +626,11 @@ void C_EnvProjectedTexture::UpdateLight()
 #endif
 
 #ifdef MAPBASE
-	if ( m_LightHandle == CLIENTSHADOW_INVALID_HANDLE || m_hTargetEntity != NULL)
+	if ( m_LightHandle == CLIENTSHADOW_INVALID_HANDLE || m_hTargetEntity != NULL || m_bForceUpdate )
 	{
 #endif
 	Vector vForward, vRight, vUp, vPos = GetAbsOrigin();
-	FlashlightState_t state;	
-	state.m_flShadowFilterSize = r_flashlightfilter.GetFloat();
+	FlashlightState_t state;
 
 	if ( m_hTargetEntity != NULL )
 	{
@@ -728,8 +716,8 @@ void C_EnvProjectedTexture::UpdateLight()
 	state.m_Color[3] = 0.0f; // fixme: need to make ambient work m_flAmbient;
 	state.m_NearZ = m_flNearZ;
 	state.m_FarZ = m_flFarZ;
-	state.m_flShadowSlopeScaleDepthBias = mat_slopescaledepthbias_shadowmap.GetFloat();
-	state.m_flShadowDepthBias = mat_depthbias_shadowmap.GetFloat();
+	state.m_flShadowSlopeScaleDepthBias = ConVarRef("mat_slopescaledepthbias_shadowmap").GetFloat();
+	state.m_flShadowDepthBias = ConVarRef("mat_depthbias_shadowmap").GetFloat();
 	state.m_bEnableShadows = m_bEnableShadows;
 	state.m_pSpotlightTexture = materials->FindTexture( m_SpotlightTextureName, TEXTURE_GROUP_OTHER, false );
 	state.m_nSpotlightTextureFrame = m_nSpotlightTextureFrame;
@@ -792,4 +780,3 @@ void C_EnvProjectedTexture::Simulate( void )
 }
 
 #endif
-

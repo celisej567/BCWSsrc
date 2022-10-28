@@ -485,7 +485,7 @@ CWorld::CWorld( )
 	//m_iScriptLanguageClient = -2;
 #endif
 
-	ConVarRef("mat_slopescaledepthbias_shadowmap").SetValue("16");
+	ConVarRef("mat_slopescaledepthbias_shadowmap").SetValue("0");
 	ConVarRef("mat_depthbias_shadowmap").SetValue("0.0001");
 
 	m_bColdWorld = false;

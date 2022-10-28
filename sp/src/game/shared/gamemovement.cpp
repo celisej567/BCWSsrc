@@ -2096,8 +2096,8 @@ void CGameMovement::WalkMove( void )
 
 void CGameMovement::OnLand(float fVelocity)
 {
+	if(cl_viewbob_enabled.GetBool())
 	player->ViewPunch(QAngle(fVelocity * cl_viewbob_onland_force.GetFloat(), 0, 0));
-	//Log("!!!!!!!!!!!!!!!!!!!!!!!! %f /n", fVelocity);
 }
 
 
