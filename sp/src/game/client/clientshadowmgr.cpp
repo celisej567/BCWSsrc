@@ -97,8 +97,8 @@
 #include "tier0/memdbgon.h"
 
 
-const char* maxprojlights = CommandLine()->ParmValue("-ptmax", "10");
-ConVar pr_max("pr_max", maxprojlights, 0, "Changes maximum of enabled env_projectedtexture and everything related to it at one time.");
+//const char* maxprojlights = CommandLine()->ParmValue("-ptmax", "10");
+ConVar pt_max("pt_max", "10", 0, "Changes maximum of enabled env_projectedtexture and everything related to it at one time.");
 
 static ConVar r_flashlightdrawfrustum( "r_flashlightdrawfrustum", "0" );
 static ConVar r_flashlightmodels( "r_flashlightmodels", "1" );
@@ -1396,7 +1396,7 @@ bool CClientShadowMgr::Init()
 
 	SetShadowBlobbyCutoffArea( 0.005 );
 
-	m_nMaxDepthTextureShadows = pr_max.GetInt();
+	m_nMaxDepthTextureShadows = pt_max.GetInt();
 
 	bool bLowEnd = ( g_pMaterialSystemHardwareConfig->GetDXSupportLevel() < 80 );
 

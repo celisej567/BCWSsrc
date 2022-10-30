@@ -1748,7 +1748,7 @@ void CChangeLevel::ChangeLevelNow( CBaseEntity *pActivator )
 	m_bTouched = true;
 
 	CBaseEntity *pPlayer = (pActivator && pActivator->IsPlayer()) ? pActivator : UTIL_GetLocalPlayer();
-
+	
 	int transitionState = InTransitionVolume(pPlayer, m_szLandmarkName);
 	if ( transitionState == TRANSITION_VOLUME_SCREENED_OUT )
 	{

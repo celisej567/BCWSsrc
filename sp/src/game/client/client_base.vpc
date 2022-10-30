@@ -184,7 +184,10 @@ $Project
 			//$File	"terrainmorph\c_terrainmodmgr.h"
 			$File	"terrainmorph\c_env_terrainmorph.cpp"
 		}
-			
+		$Folder "Shared"
+		{
+		$File	"$SRCDIR\game\shared\content_mounter.cpp"	
+		}
 		
 		//$File	"c_env_cascade_light.cpp"
 		//$File	"C_Env_Cascade_Light.h"

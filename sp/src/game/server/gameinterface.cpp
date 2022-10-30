@@ -763,6 +763,10 @@ bool CServerGameDLL::DLLInit( CreateInterfaceFn appSystemFactory,
 	gamestatsuploader->InitConnection();
 #endif
 
+
+	extern void MountExtraContent();
+	MountExtraContent();
+
 	return true;
 }
 

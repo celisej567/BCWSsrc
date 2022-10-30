@@ -340,6 +340,10 @@ ConVar	sk_plr_num_shotgun_pellets_double( "sk_plr_num_shotgun_pellets_double","1
 ConVar	sk_npc_num_shotgun_pellets( "sk_npc_num_shotgun_pellets","8", FCVAR_REPLICATED);
 #endif
 
+ConVar	sk_plr_num_meatgun_pellets("sk_plr_num_meatgun_pellets", "7", FCVAR_REPLICATED);
+ConVar	sk_plr_num_meatgun_pellets_double("sk_plr_num_meatgun_pellets_double", "12", FCVAR_REPLICATED);
+ConVar	sk_npc_num_meatgun_pellets("sk_npc_num_meatgun_pellets", "8", FCVAR_REPLICATED);
+
 ConVar	sk_plr_dmg_rpg_round	( "sk_plr_dmg_rpg_round","0", FCVAR_REPLICATED);
 ConVar	sk_npc_dmg_rpg_round	( "sk_npc_dmg_rpg_round","0", FCVAR_REPLICATED);
 ConVar	sk_max_rpg_round		( "sk_max_rpg_round","0", FCVAR_REPLICATED);

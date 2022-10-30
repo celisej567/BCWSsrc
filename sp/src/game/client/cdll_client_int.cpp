@@ -1118,6 +1118,9 @@ int CHLClient::Init( CreateInterfaceFn appSystemFactory, CreateInterfaceFn physi
 
 	C_BaseAnimating::InitBoneSetupThreadPool();
 
+	extern void MountExtraContent();
+	MountExtraContent();
+
 #if defined( WIN32 ) && !defined( _X360 )
 	// NVNT connect haptics sytem
 	ConnectHaptics(appSystemFactory);

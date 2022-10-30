@@ -93,7 +93,15 @@ $Project
 			$File	"terrainmorph\terrainmod_functions.cpp"
 		}
 		
+		$Folder "BCWS"
+		{
+			$File "bcws\weapon_meatgun.cpp"
+		}
 		
+		$Folder "Shared"
+		{
+		$File	"$SRCDIR\game\shared\content_mounter.cpp"	
+		}
 		
 		$File	"$SRCDIR\game\shared\achievement_saverestore.cpp"
 		$File	"$SRCDIR\game\shared\achievement_saverestore.h"
