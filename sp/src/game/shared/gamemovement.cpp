@@ -75,15 +75,9 @@ bool g_bMovementOptimizations = true;
 //cam shake
 ConVar cl_viewbob_enabled("cl_viewbob_enabled", "1", 0, "Oscillation Toggle");
 ConVar cl_viewbob_enabled_z("cl_viewbob_enabled_z", "1");
-//ConVar cl_dynamic_fov("cl_dynamic_fov", "0");
-
-//ConVar cl_viewbob_transform("cl_viewbob_transform", "0");
 
 ConVar cl_viewbob_drop_xscale("cl_viewbob_drop_xscale", "1");
 ConVar cl_viewbob_drop_yscale("cl_viewbob_drop_yscale", "1");
-
-//ConVar cl_dynamic_fov_offset("cl_dynamic_fov_offset", "50");
-//ConVar cl_dynamic_fov_timer("cl_dynamic_fov_timer", "2");
 
 ConVar cl_viewbob_xtimer("cl_viewbob_xtimer", "10", 0, "Speed of Oscillation");
 ConVar cl_viewbob_ytimer("cl_viewbob_ytimer", "2.5", 0, "Speed of Oscillation");
@@ -1952,10 +1946,9 @@ void CGameMovement::WalkMove( void )
 	fmove = mv->m_flForwardMove;
 	smove = mv->m_flSideMove;
 
-	CHL2_Player* HLplayer = dynamic_cast<CHL2_Player*>(player);
-
 	if (cl_viewbob_enabled.GetBool() && !engine->IsPaused())
 	{
+		CHL2_Player* HLplayer = dynamic_cast<CHL2_Player*>(player);
 		if (!HLplayer->IsSprinting())
 		{
 			float xoffset = sin(gpGlobals->curtime * cl_viewbob_xtimer.GetFloat()) * player->GetAbsVelocity().Length() * cl_viewbob_xscale.GetFloat() / cl_viewbob_xoffset.GetFloat();
@@ -1984,8 +1977,6 @@ void CGameMovement::WalkMove( void )
 			float zoffset = 2.5 * player->GetAbsVelocity().Length() * cl_viewbob_zscale.GetFloat() / cl_viewbob_zoffset.GetFloat();
 			player->ViewPunch(QAngle(0, 0, -zoffset));
 		}
-	
-
 	}
 
 	// Zero out z components of movement vectors
