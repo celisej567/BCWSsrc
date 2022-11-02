@@ -461,7 +461,7 @@ void CWeaponPipe::Swing(int bIsSecondary)
 
 	//Setup our next attack times
 	m_flNextPrimaryAttack = gpGlobals->curtime + GetFireRate();
-	m_flNextSecondaryAttack = gpGlobals->curtime + SequenceDuration() + 2;
+	m_flNextSecondaryAttack = gpGlobals->curtime + SequenceDuration();
 
 #ifndef MAPBASE
 	//Play swing sound
@@ -499,8 +499,12 @@ void CWeaponPipe::ItemPostFrame()
 			SendWeaponAnim(ACT_VM_IDLE);
 			return;
 		}
+		else if (AtkPressEnd - AtkPressStart > 3)
+			AtkDifference = 3;
 		else
 			AtkDifference = AtkPressEnd - AtkPressStart;
+
+
 
 		SendWeaponAnim(ACT_VM_HITCENTER2_END);
 		Swing(true);
