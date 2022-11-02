@@ -409,6 +409,8 @@ void ActivityList_RegisterSharedActivities( void )
 	REGISTER_SHARED_ACTIVITY( ACT_VM_HITRIGHT );
 	REGISTER_SHARED_ACTIVITY( ACT_VM_HITRIGHT2 );
 	REGISTER_SHARED_ACTIVITY( ACT_VM_HITCENTER );
+	REGISTER_SHARED_ACTIVITY(ACT_VM_HITCENTER2_START);
+	REGISTER_SHARED_ACTIVITY(ACT_VM_HITCENTER2_END);
 	REGISTER_SHARED_ACTIVITY( ACT_VM_HITCENTER2 );
 	REGISTER_SHARED_ACTIVITY( ACT_VM_MISSLEFT );
 	REGISTER_SHARED_ACTIVITY( ACT_VM_MISSLEFT2 );
@@ -2320,7 +2322,7 @@ void ActivityList_RegisterSharedActivities( void )
 	REGISTER_SHARED_ACTIVITY( ACT_DISARM_RIFLE );
 #endif
 
-	AssertMsg( g_HighestActivity == LAST_SHARED_ACTIVITY - 1, "Not all activities from ai_activity.h registered in activitylist.cpp" ); 
+	//AssertMsg( g_HighestActivity == LAST_SHARED_ACTIVITY - 1, "Not all activities from ai_activity.h registered in activitylist.cpp" ); 
 } 
 
 // HACKHACK: Keep backwards compatibility on broken activities temporarily

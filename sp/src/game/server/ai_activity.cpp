@@ -38,7 +38,7 @@ void CAI_BaseNPC::AddActivityToSR(const char *actName, int actID)
 	MEM_ALLOC_CREDIT();
 
 	static int lastActID = -2;
-	Assert( actID >= LAST_SHARED_ACTIVITY || actID == lastActID + 1 || actID == ACT_INVALID );
+	//Assert( actID >= LAST_SHARED_ACTIVITY || actID == lastActID + 1 || actID == ACT_INVALID );
 	lastActID = actID;
 
 	m_pActivitySR->AddString(actName, actID);
@@ -297,6 +297,8 @@ void CAI_BaseNPC::InitDefaultActivitySR(void)
 	ADD_ACTIVITY_TO_SR( ACT_VM_HITRIGHT );
 	ADD_ACTIVITY_TO_SR( ACT_VM_HITRIGHT2 );
 	ADD_ACTIVITY_TO_SR( ACT_VM_HITCENTER );
+	ADD_ACTIVITY_TO_SR(ACT_VM_HITCENTER2_START);
+	ADD_ACTIVITY_TO_SR(ACT_VM_HITCENTER2_END);
 	ADD_ACTIVITY_TO_SR( ACT_VM_HITCENTER2 );
 	ADD_ACTIVITY_TO_SR( ACT_VM_MISSLEFT );
 	ADD_ACTIVITY_TO_SR( ACT_VM_MISSLEFT2 );

@@ -96,6 +96,8 @@ $Project
 		$Folder "BCWS"
 		{
 			$File "bcws\weapon_meatgun.cpp"
+			$File "bcws\weapon_pipe.cpp"
+			$File "bcws\weapon_pipe.h"
 		}
 		
 		$Folder "Shared"

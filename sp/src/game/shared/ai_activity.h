@@ -277,6 +277,8 @@ typedef enum
 	ACT_VM_HITRIGHT,			// bludgeon, swing to right - hit (primary attk)
 	ACT_VM_HITRIGHT2,			// bludgeon, swing to right - hit (secondary attk)
 	ACT_VM_HITCENTER,			// bludgeon, swing center - hit (primary attk)
+	ACT_VM_HITCENTER2_START,
+	ACT_VM_HITCENTER2_END,
 	ACT_VM_HITCENTER2,			// bludgeon, swing center - hit (secondary attk)
 	ACT_VM_MISSLEFT,			// bludgeon, swing to left - miss (primary attk)
 	ACT_VM_MISSLEFT2,			// bludgeon, swing to left - miss (secondary attk)

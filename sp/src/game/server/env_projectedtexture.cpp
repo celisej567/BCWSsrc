@@ -161,7 +161,7 @@ CEnvProjectedTexture::CEnvProjectedTexture(void)
 	m_flLinearAtten = 100.0f;
 	m_flConstantAtten = 0.0f;
 	m_flShadowAtten = 0.0f;
-	m_flShadowFilter = 0.5f;
+	m_flShadowFilter = 0.3f;
 #endif
 }
 
