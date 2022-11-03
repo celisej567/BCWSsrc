@@ -189,6 +189,71 @@ $Project
 		$File	"$SRCDIR\game\shared\content_mounter.cpp"	
 		}
 		
+		//$Folder "Source ++"
+		//{
+			//$Folder	"Deferred"
+			//{
+				//$Folder "Shared"
+				//{
+					//$File	"$SRCDIR\game\shared\source++\deferred\CDefLight.cpp"
+					//$File	"$SRCDIR\game\shared\source++\deferred\CDefLight.h"
+					//$File	"$SRCDIR\game\shared\source++\deferred\CDefLightContainer.cpp"
+					//$File	"$SRCDIR\game\shared\source++\deferred\CDefLightContainer.h"
+					//$File	"$SRCDIR\game\shared\source++\deferred\CDefLightGlobal.cpp"
+					//$File	"$SRCDIR\game\shared\source++\deferred\CDefLightGlobal.h"
+					//$File	"$SRCDIR\game\shared\source++\deferred\deferred_shared_common.cpp"
+					//$File	"$SRCDIR\game\shared\source++\deferred\deferred_shared_common.h"
+					//$File	"$SRCDIR\game\shared\source++\deferred\ssemath_ext.h"
+				//}
+		
+				//$Folder "Client"
+				//{
+					//$Folder "VGUI"
+					//{
+						//$File	"source++\deferred\vgui\projectable_factory.cpp"
+						//$File	"source++\deferred\vgui\projectable_factory.h"
+						//$File	"source++\deferred\vgui\vgui_deferred.h"
+						//$File	"source++\deferred\vgui\vgui_editor_controls.cpp"
+						//$File	"source++\deferred\vgui\vgui_editor_controls.h"
+						//$File	"source++\deferred\vgui\vgui_editor_props.cpp"
+						//$File	"source++\deferred\vgui\vgui_editor_props.h"
+						//$File	"source++\deferred\vgui\vgui_editor_root.cpp"
+						//$File	"source++\deferred\vgui\vgui_marquee.cpp"
+						//$File	"source++\deferred\vgui\vgui_marquee.h"
+						//$File	"source++\deferred\vgui\vgui_particles.cpp"
+						//$File	"source++\deferred\vgui\vgui_particles.h"
+						//$File	"source++\deferred\vgui\vgui_projectable.cpp"
+						//$File	"source++\deferred\vgui\vgui_projectable.h"
+					//}
+			
+					//$File	"source++\deferred\cascade_t.h"
+					//$File	"source++\deferred\cascade_t.cpp"
+					//$File	"source++\deferred\cdeferred_manager_client.cpp"
+					//$File	"source++\deferred\cdeferred_manager_client.h"
+					//$File	"source++\deferred\clight_manager.cpp"
+					//$File	"source++\deferred\clight_manager.h"
+					//$File	"source++\deferred\def_light_t.cpp"
+					//$File	"source++\deferred\def_light_t.h"
+					//$File	"source++\deferred\DefCookieProjectable.cpp"
+					//$File	"source++\deferred\DefCookieProjectable.h"
+					//$File	"source++\deferred\DefCookieTexture.cpp"
+					//$File	"source++\deferred\DefCookieTexture.h"
+					//$File	"source++\deferred\deferred_client_common.cpp"
+					//$File	"source++\deferred\deferred_client_common.h"
+					//$File	"source++\deferred\deferred_rt.cpp"
+//					$File	"source++\deferred\deferred_rt.h"
+//					$File	"source++\deferred\flashlighteffect_deferred.cpp"
+//					$File	"source++\deferred\flashlighteffect_deferred.h"
+//					$File	"source++\deferred\IDefCookie.h"
+//					$File	"source++\deferred\IDeferredExtClient.cpp"
+//					$File	"source++\deferred\materialsystem_passthru.cpp"
+//					$File	"source++\deferred\materialsystem_passthru.h"
+//					$File	"source++\deferred\viewrender_deferred.cpp"
+//					$File	"source++\deferred\viewrender_deferred.h"
+//				}
+	//		}
+//		}
+		
 		//$File	"c_env_cascade_light.cpp"
 		//$File	"C_Env_Cascade_Light.h"
 		$File	"hl2\C_Func_Monitor.cpp"

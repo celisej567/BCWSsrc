@@ -461,7 +461,7 @@ void CWeaponPipe::Swing(int bIsSecondary)
 
 	//Setup our next attack times
 	m_flNextPrimaryAttack = gpGlobals->curtime + GetFireRate();
-	m_flNextSecondaryAttack = gpGlobals->curtime + SequenceDuration();
+	m_flNextSecondaryAttack = gpGlobals->curtime + 2;
 
 #ifndef MAPBASE
 	//Play swing sound
@@ -487,25 +487,24 @@ void CWeaponPipe::ItemPostFrame()
 	{
 		SendWeaponAnim(ACT_VM_HITCENTER2_START);
 		AtkPressStart = gpGlobals->curtime;
-		m_flNextPrimaryAttack = gpGlobals->curtime + 999999999;
+		m_flNextPrimaryAttack = gpGlobals->curtime + 100;
 	}
 
 	//On Mouse2 released
 	if (pOwner->m_afButtonReleased & IN_ATTACK2)
 	{
+		m_flNextPrimaryAttack = 0;
 		AtkPressEnd = gpGlobals->curtime;
-		if (AtkPressEnd - AtkPressStart < 0.6)
+		AtkDifference = AtkPressEnd - AtkPressStart;
+		if (AtkDifference < 0.6f)
 		{
 			SendWeaponAnim(ACT_VM_IDLE);
 			return;
 		}
-		else if (AtkPressEnd - AtkPressStart > 3)
+		else if (AtkDifference > 3)
 			AtkDifference = 3;
-		else
-			AtkDifference = AtkPressEnd - AtkPressStart;
-
-
-
+		
+		
 		SendWeaponAnim(ACT_VM_HITCENTER2_END);
 		Swing(true);
 		//Msg("Delay is: %f\n", AtkDifference);
