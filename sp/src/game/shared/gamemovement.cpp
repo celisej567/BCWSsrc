@@ -1946,8 +1946,6 @@ void CGameMovement::WalkMove( void )
 	fmove = mv->m_flForwardMove;
 	smove = mv->m_flSideMove;
 
-	
-
 	if (cl_viewbob_enabled.GetBool() && !engine->IsPaused())
 	{
 		CHL2_Player* HLplayer = dynamic_cast<CHL2_Player*>(player);

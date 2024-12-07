@@ -1,4 +1,30 @@
-D:\SOURCE\dx9sdk\utilities\dx_proxy.dll 
+SDK_lightmappedgeneric_ps20b.fxc
+common_fxc.h
+common_flashlight_fxc.h
+lightmappedgeneric_ps2_3_x.h
+common_pragmas.h
+common_ps_fxc.h
+common_lightmappedgeneric_fxc.h
+common_hlsl_cpp_consts.h
+SDK_lightmappedgeneric_ps20b.fxc
+common_fxc.h
+common_flashlight_fxc.h
+lightmappedgeneric_ps2_3_x.h
+common_pragmas.h
+common_ps_fxc.h
+common_lightmappedgeneric_fxc.h
+common_hlsl_cpp_consts.h
+SDK_lightmappedgeneric_vs20.fxc
+common_vs_fxc.h
+common_fxc.h
+common_hlsl_cpp_consts.h
+common_pragmas.h
+SDK_lightmappedgeneric_vs20.fxc
+common_vs_fxc.h
+common_fxc.h
+common_hlsl_cpp_consts.h
+common_pragmas.h
+D:\SOURCEREPOZ\BCWSbase\sp\src\dx9sdk\utilities\dx_proxy.dll 
 D:\SteamLibrary\steamapps\common\Source SDK Base 2013 Singleplayer\bin\shadercompile.exe 
 D:\SteamLibrary\steamapps\common\Source SDK Base 2013 Singleplayer\bin\shadercompile_dll.dll 
 D:\SteamLibrary\steamapps\common\Source SDK Base 2013 Singleplayer\bin\vstdlib.dll 

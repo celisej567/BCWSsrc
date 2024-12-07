@@ -8,7 +8,6 @@ $Macro OUTBINDIR	"$SRCDIR\..\game\$GAMENAME\bin"
 
 $Include "$SRCDIR\vpc_scripts\source_dll_base.vpc"
 
-
 // Mapbase shaders
 $Include "$SRCDIR\materialsystem\stdshaders\game_shader_dx9_mapbase.vpc" [$MAPBASE]
 
@@ -60,15 +59,6 @@ $Project
 
 		$File	"Bloom.cpp"
 		$File	"screenspace_general.cpp"
-		
-		$File	"nodeshader.cpp"
-		$File	"procshader.cpp"
-		$File	"prev.cpp"
-		
-		$File	"../ivprocshader.cpp"
-		$File	"../ivprocshader.h"
-		$File	"../procshaderinterface.cpp"
-		$File	"../procshaderinterface.h"
 	}
 
 	$Folder	"Header Files"
@@ -101,5 +91,3 @@ $Project
 	$Shaders	"stdshader_dx9_20b.txt"
 	$Shaders	"stdshader_dx9_30.txt"
 }
-
-//$Include "..\procshader\procshader.vpc"

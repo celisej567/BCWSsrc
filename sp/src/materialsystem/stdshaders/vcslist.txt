@@ -1,0 +1,15 @@
+..\..\..\game\hl2\shaders\fxc\SDK_lightmappedgeneric_decal_ps20.vcs
+..\..\..\game\hl2\shaders\fxc\SDK_lightmappedgeneric_decal_ps20b.vcs
+..\..\..\game\hl2\shaders\fxc\SDK_lightmappedgeneric_decal_vs20.vcs
+..\..\..\game\hl2\shaders\fxc\SDK_lightmappedgeneric_flashlight_vs11.vcs
+..\..\..\game\hl2\shaders\fxc\SDK_lightmappedgeneric_flashlight_vs20.vcs
+..\..\..\game\hl2\shaders\fxc\SDK_lightmappedgeneric_flashlight_ps20.vcs
+..\..\..\game\hl2\shaders\fxc\SDK_lightmappedgeneric_flashlight_ps20b.vcs
+..\..\..\game\hl2\shaders\fxc\SDK_lightmappedgeneric_lightingonly_overbright2_ps11.vcs
+..\..\..\game\hl2\shaders\fxc\SDK_lightmappedgeneric_lightingonly_vs11.vcs
+..\..\..\game\hl2\shaders\fxc\SDK_lightmappedgeneric_ps20b.vcs
+..\..\..\game\hl2\shaders\fxc\SDK_lightmappedgeneric_ps11.vcs
+..\..\..\game\hl2\shaders\fxc\SDK_lightmappedgeneric_vs20.vcs
+..\..\..\game\hl2\shaders\fxc\SDK_lightmappedreflective_ps20.vcs
+..\..\..\game\hl2\shaders\fxc\SDK_lightmappedreflective_ps20b.vcs
+..\..\..\game\hl2\shaders\fxc\SDK_lightmappedreflective_vs20.vcs

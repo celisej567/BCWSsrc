@@ -25,7 +25,7 @@
 #include "view_shared.h"
 #else
 #include "interface.h"
-#include "../../game/client/ShaderEditor/ShaderEditorSystem.h"
+//#include "../../game/client/ShaderEditor/ShaderEditorSystem.h"
 #endif // NOT SHADER_EDITOR_DLL
 
 class IMaterial;
@@ -40,7 +40,7 @@ enum SEDIT_SKYMASK_MODE
 	SKYMASK_FULL, // render at full fb size
 };
 
-class CViewSetup_SEdit_Shared
+/*class CViewSetup_SEdit_Shared
 {
 public:
 	CViewSetup_SEdit_Shared()
@@ -69,7 +69,7 @@ public:
 	QAngle		angles;
 	float		zNear,zFar,zNearViewmodel,zFarViewmodel;
 	float		m_flAspectRatio;
-};
+};*/
 
 
 class IVShaderEditor : public IBaseInterface

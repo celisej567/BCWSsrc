@@ -663,16 +663,21 @@ void DrawLightmappedGenericFlashlight_DX9_Internal( CBaseVSShader *pShader, IMat
 		}
 #endif
 
+		ITexture* pCascadedDepthTexture = /*bHasFlashlight ? NULL : */ (ITexture*)pShaderAPI->GetIntRenderingParameter(INT_CASCADED_DEPTHTEXTURE);
+		const int iCascadedShadowCombo = (pCascadedDepthTexture != NULL) ? 1 : 0;
+
 		if ( g_pHardwareConfig->SupportsShaderModel_3_0() )
 		{
 			DECLARE_DYNAMIC_VERTEX_SHADER( sdk_lightmappedgeneric_flashlight_vs30 );
 			SET_DYNAMIC_VERTEX_SHADER_COMBO( DOWATERFOG, pShaderAPI->GetSceneFogMode() == MATERIAL_FOG_LINEAR_BELOW_FOG_Z );
 			SET_DYNAMIC_VERTEX_SHADER( sdk_lightmappedgeneric_flashlight_vs30 );
+			//SET_DYNAMIC_VERTEX_SHADER_COMBO(CASCADED_SHADOW, iCascadedShadowCombo);
 		}
 		else
 		{
 			DECLARE_DYNAMIC_VERTEX_SHADER( sdk_lightmappedgeneric_flashlight_vs20 );
 			SET_DYNAMIC_VERTEX_SHADER_COMBO( DOWATERFOG, pShaderAPI->GetSceneFogMode() == MATERIAL_FOG_LINEAR_BELOW_FOG_Z );
+
 			SET_DYNAMIC_VERTEX_SHADER( sdk_lightmappedgeneric_flashlight_vs20 );
 		}
 
@@ -726,6 +731,7 @@ void DrawLightmappedGenericFlashlight_DX9_Internal( CBaseVSShader *pShader, IMat
 			DECLARE_DYNAMIC_PIXEL_SHADER( sdk_lightmappedgeneric_flashlight_ps30 );
 			SET_DYNAMIC_PIXEL_SHADER_COMBO( PIXELFOGTYPE,  pShaderAPI->GetPixelFogCombo() );
 			SET_DYNAMIC_PIXEL_SHADER_COMBO( FLASHLIGHTSHADOWS, flashlightState.m_bEnableShadows );
+			//SET_DYNAMIC_PIXEL_SHADER_COMBO(CASCADED_SHADOW, iCascadedShadowCombo);
 			SET_DYNAMIC_PIXEL_SHADER( sdk_lightmappedgeneric_flashlight_ps30 );
 		}
 		else if ( g_pHardwareConfig->SupportsPixelShaders_2_b() )
@@ -733,6 +739,7 @@ void DrawLightmappedGenericFlashlight_DX9_Internal( CBaseVSShader *pShader, IMat
 			DECLARE_DYNAMIC_PIXEL_SHADER( sdk_lightmappedgeneric_flashlight_ps20b );
 			SET_DYNAMIC_PIXEL_SHADER_COMBO( PIXELFOGTYPE,  pShaderAPI->GetPixelFogCombo() );
 			SET_DYNAMIC_PIXEL_SHADER_COMBO( FLASHLIGHTSHADOWS, flashlightState.m_bEnableShadows );
+			//SET_DYNAMIC_PIXEL_SHADER_COMBO(CASCADED_SHADOW, iCascadedShadowCombo);
 			SET_DYNAMIC_PIXEL_SHADER( sdk_lightmappedgeneric_flashlight_ps20b );
 		}
 		else
@@ -1566,9 +1573,10 @@ void DrawLightmappedGeneric_DX9_Internal(CBaseVSShader *pShader, IMaterialVar** 
 			// Doing it here in the shader itself allows us to retain other properties, like FANCY_BLENDING.
 			else
 			{
-				// m_SemiStaticCmdsOut wasn't being sent correctly, so we have to assign this to the API directly
-				float editorBlend = bEditorBlend ? 1.0f : 0.0f;
-				pContextData->m_SemiStaticCmdsOut.SetPixelShaderConstant( 21, &editorBlend, 1 );
+				// TODO: This is inefficient use of a constant; Something should be done about this in the future
+				static const float editorBlend[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+				static const float regularBlend[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+				pContextData->m_SemiStaticCmdsOut.SetPixelShaderConstant( 21, (bEditorBlend ? editorBlend : regularBlend), 1 );
 				/*
 				if (bEditorBlend)
 				{
@@ -1609,6 +1617,9 @@ void DrawLightmappedGeneric_DX9_Internal(CBaseVSShader *pShader, IMaterialVar** 
 				bVertexShaderFastPath = false;
 		}
 
+		ITexture* pCascadedDepthTexture = hasFlashlight ? NULL : (ITexture*)pShaderAPI->GetIntRenderingParameter(INT_CASCADED_DEPTHTEXTURE);
+		const int iCascadedShadowCombo = (pCascadedDepthTexture != NULL) ? 1 : 0;
+
 		MaterialFogMode_t fogType = pShaderAPI->GetSceneFogMode();
 		if ( g_pHardwareConfig->SupportsShaderModel_3_0() )
 		{
@@ -1619,10 +1630,12 @@ void DrawLightmappedGeneric_DX9_Internal(CBaseVSShader *pShader, IMaterialVar** 
 				LIGHTING_PREVIEW, 
 				(nFixedLightingMode)?1:0
 				);
+			SET_DYNAMIC_VERTEX_SHADER_COMBO(CASCADED_SHADOW, iCascadedShadowCombo);
 			SET_DYNAMIC_VERTEX_SHADER_CMD( DynamicCmdsOut, sdk_lightmappedgeneric_vs30 );
 		}
 		else
 		{
+
 			DECLARE_DYNAMIC_VERTEX_SHADER( sdk_lightmappedgeneric_vs20 );
 			SET_DYNAMIC_VERTEX_SHADER_COMBO( DOWATERFOG,  fogType == MATERIAL_FOG_LINEAR_BELOW_FOG_Z );
 			SET_DYNAMIC_VERTEX_SHADER_COMBO( FASTPATH,  bVertexShaderFastPath );
@@ -1630,6 +1643,7 @@ void DrawLightmappedGeneric_DX9_Internal(CBaseVSShader *pShader, IMaterialVar** 
 				LIGHTING_PREVIEW, 
 				(nFixedLightingMode)?1:0
 				);
+			SET_DYNAMIC_VERTEX_SHADER_COMBO(CASCADED_SHADOW, iCascadedShadowCombo);
 			SET_DYNAMIC_VERTEX_SHADER_CMD( DynamicCmdsOut, sdk_lightmappedgeneric_vs20 );
 		}
 
@@ -1666,6 +1680,7 @@ void DrawLightmappedGeneric_DX9_Internal(CBaseVSShader *pShader, IMaterialVar** 
 			// Don't write fog to alpha if we're using translucency
 			SET_DYNAMIC_PIXEL_SHADER_COMBO( WRITE_DEPTH_TO_DESTALPHA, bWriteDepthToAlpha );
 			SET_DYNAMIC_PIXEL_SHADER_COMBO( WRITEWATERFOGTODESTALPHA, bWriteWaterFogToAlpha );
+			SET_DYNAMIC_PIXEL_SHADER_COMBO(CASCADED_SHADOW, iCascadedShadowCombo);
 			SET_DYNAMIC_PIXEL_SHADER_COMBO( LIGHTING_PREVIEW, nFixedLightingMode );
 
 			SET_DYNAMIC_PIXEL_SHADER_CMD( DynamicCmdsOut, sdk_lightmappedgeneric_ps30 );
@@ -1680,6 +1695,7 @@ void DrawLightmappedGeneric_DX9_Internal(CBaseVSShader *pShader, IMaterialVar** 
 			// Don't write fog to alpha if we're using translucency
 			SET_DYNAMIC_PIXEL_SHADER_COMBO( WRITE_DEPTH_TO_DESTALPHA, bWriteDepthToAlpha );
 			SET_DYNAMIC_PIXEL_SHADER_COMBO( WRITEWATERFOGTODESTALPHA, bWriteWaterFogToAlpha );
+			SET_DYNAMIC_PIXEL_SHADER_COMBO(CASCADED_SHADOW, iCascadedShadowCombo);
 			SET_DYNAMIC_PIXEL_SHADER_COMBO( LIGHTING_PREVIEW, nFixedLightingMode );
 			
 			SET_DYNAMIC_PIXEL_SHADER_CMD( DynamicCmdsOut, sdk_lightmappedgeneric_ps20b );

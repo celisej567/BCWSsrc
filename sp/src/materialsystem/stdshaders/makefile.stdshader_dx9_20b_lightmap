@@ -1,0 +1,129 @@
+default:  fxctmp9_tmp\SDK_lightmappedgeneric_decal_ps20.inc shaders\fxc\SDK_lightmappedgeneric_decal_ps20.vcs fxctmp9_tmp\SDK_lightmappedgeneric_decal_ps20b.inc shaders\fxc\SDK_lightmappedgeneric_decal_ps20b.vcs fxctmp9_tmp\SDK_lightmappedgeneric_decal_vs20.inc shaders\fxc\SDK_lightmappedgeneric_decal_vs20.vcs fxctmp9_tmp\SDK_lightmappedgeneric_flashlight_vs11.inc shaders\fxc\SDK_lightmappedgeneric_flashlight_vs11.vcs fxctmp9_tmp\SDK_lightmappedgeneric_flashlight_vs20.inc shaders\fxc\SDK_lightmappedgeneric_flashlight_vs20.vcs fxctmp9_tmp\SDK_lightmappedgeneric_flashlight_ps20.inc shaders\fxc\SDK_lightmappedgeneric_flashlight_ps20.vcs fxctmp9_tmp\SDK_lightmappedgeneric_flashlight_ps20b.inc shaders\fxc\SDK_lightmappedgeneric_flashlight_ps20b.vcs fxctmp9_tmp\SDK_lightmappedgeneric_lightingonly_overbright2_ps11.inc shaders\fxc\SDK_lightmappedgeneric_lightingonly_overbright2_ps11.vcs fxctmp9_tmp\SDK_lightmappedgeneric_lightingonly_vs11.inc shaders\fxc\SDK_lightmappedgeneric_lightingonly_vs11.vcs fxctmp9_tmp\SDK_lightmappedgeneric_ps20b.inc shaders\fxc\SDK_lightmappedgeneric_ps20b.vcs fxctmp9_tmp\SDK_lightmappedgeneric_ps11.inc shaders\fxc\SDK_lightmappedgeneric_ps11.vcs fxctmp9_tmp\SDK_lightmappedgeneric_vs20.inc shaders\fxc\SDK_lightmappedgeneric_vs20.vcs fxctmp9_tmp\SDK_lightmappedreflective_ps20.inc shaders\fxc\SDK_lightmappedreflective_ps20.vcs fxctmp9_tmp\SDK_lightmappedreflective_ps20b.inc shaders\fxc\SDK_lightmappedreflective_ps20b.vcs fxctmp9_tmp\SDK_lightmappedreflective_vs20.inc shaders\fxc\SDK_lightmappedreflective_vs20.vcs
+
+fxctmp9_tmp\SDK_lightmappedgeneric_decal_ps20.inc shaders\fxc\SDK_lightmappedgeneric_decal_ps20.vcs: SDK_lightmappedgeneric_decal_ps2x.fxc common_vertexlitgeneric_dx9.h common_fxc.h shader_constant_register_map.h common_pragmas.h common_ps_fxc.h common_hlsl_cpp_consts.h
+	perl D:\SOURCEREPOZ\BCWSbase\sp\src\devtools\bin\fxc_prep.pl   -source "D:\SOURCEREPOZ\BCWSbase\sp\src" SDK_lightmappedgeneric_decal_ps2x.fxc-----SDK_lightmappedgeneric_decal_ps20
+	echo SDK_lightmappedgeneric_decal_ps2x.fxc>> filestocopy.txt
+	echo common_vertexlitgeneric_dx9.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo shader_constant_register_map.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+
+fxctmp9_tmp\SDK_lightmappedgeneric_decal_ps20b.inc shaders\fxc\SDK_lightmappedgeneric_decal_ps20b.vcs: SDK_lightmappedgeneric_decal_ps2x.fxc common_vertexlitgeneric_dx9.h common_fxc.h shader_constant_register_map.h common_pragmas.h common_ps_fxc.h common_hlsl_cpp_consts.h
+	perl D:\SOURCEREPOZ\BCWSbase\sp\src\devtools\bin\fxc_prep.pl   -source "D:\SOURCEREPOZ\BCWSbase\sp\src" SDK_lightmappedgeneric_decal_ps2x.fxc-----SDK_lightmappedgeneric_decal_ps20b
+	echo SDK_lightmappedgeneric_decal_ps2x.fxc>> filestocopy.txt
+	echo common_vertexlitgeneric_dx9.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo shader_constant_register_map.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+
+fxctmp9_tmp\SDK_lightmappedgeneric_decal_vs20.inc shaders\fxc\SDK_lightmappedgeneric_decal_vs20.vcs: SDK_lightmappedgeneric_decal_vs20.fxc common_fxc.h common_vs_fxc.h common_pragmas.h common_hlsl_cpp_consts.h
+	perl D:\SOURCEREPOZ\BCWSbase\sp\src\devtools\bin\fxc_prep.pl   -source "D:\SOURCEREPOZ\BCWSbase\sp\src" SDK_lightmappedgeneric_decal_vs20.fxc-----SDK_lightmappedgeneric_decal_vs20
+	echo SDK_lightmappedgeneric_decal_vs20.fxc>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo common_vs_fxc.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+
+fxctmp9_tmp\SDK_lightmappedgeneric_flashlight_vs11.inc shaders\fxc\SDK_lightmappedgeneric_flashlight_vs11.vcs: SDK_lightmappedgeneric_flashlight_vs11.fxc common_hlsl_cpp_consts.h common_pragmas.h common_vs_fxc.h common_fxc.h
+	perl D:\SOURCEREPOZ\BCWSbase\sp\src\devtools\bin\fxc_prep.pl   -source "D:\SOURCEREPOZ\BCWSbase\sp\src" SDK_lightmappedgeneric_flashlight_vs11.fxc-----SDK_lightmappedgeneric_flashlight_vs11
+	echo SDK_lightmappedgeneric_flashlight_vs11.fxc>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_vs_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+
+fxctmp9_tmp\SDK_lightmappedgeneric_flashlight_vs20.inc shaders\fxc\SDK_lightmappedgeneric_flashlight_vs20.vcs: SDK_lightmappedgeneric_flashlight_vs20.fxc common_fxc.h common_vs_fxc.h common_hlsl_cpp_consts.h common_pragmas.h
+	perl D:\SOURCEREPOZ\BCWSbase\sp\src\devtools\bin\fxc_prep.pl   -source "D:\SOURCEREPOZ\BCWSbase\sp\src" SDK_lightmappedgeneric_flashlight_vs20.fxc-----SDK_lightmappedgeneric_flashlight_vs20
+	echo SDK_lightmappedgeneric_flashlight_vs20.fxc>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo common_vs_fxc.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+
+fxctmp9_tmp\SDK_lightmappedgeneric_flashlight_ps20.inc shaders\fxc\SDK_lightmappedgeneric_flashlight_ps20.vcs: SDK_lightmappedgeneric_flashlight_ps2x.fxc common_flashlight_fxc.h common_fxc.h shader_constant_register_map.h common_vertexlitgeneric_dx9.h common_lightmappedgeneric_fxc.h common_ps_fxc.h common_hlsl_cpp_consts.h common_pragmas.h
+	perl D:\SOURCEREPOZ\BCWSbase\sp\src\devtools\bin\fxc_prep.pl   -source "D:\SOURCEREPOZ\BCWSbase\sp\src" SDK_lightmappedgeneric_flashlight_ps2x.fxc-----SDK_lightmappedgeneric_flashlight_ps20
+	echo SDK_lightmappedgeneric_flashlight_ps2x.fxc>> filestocopy.txt
+	echo common_flashlight_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo shader_constant_register_map.h>> filestocopy.txt
+	echo common_vertexlitgeneric_dx9.h>> filestocopy.txt
+	echo common_lightmappedgeneric_fxc.h>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+
+fxctmp9_tmp\SDK_lightmappedgeneric_flashlight_ps20b.inc shaders\fxc\SDK_lightmappedgeneric_flashlight_ps20b.vcs: SDK_lightmappedgeneric_flashlight_ps2x.fxc common_flashlight_fxc.h common_fxc.h shader_constant_register_map.h common_vertexlitgeneric_dx9.h common_lightmappedgeneric_fxc.h common_ps_fxc.h common_hlsl_cpp_consts.h common_pragmas.h
+	perl D:\SOURCEREPOZ\BCWSbase\sp\src\devtools\bin\fxc_prep.pl   -source "D:\SOURCEREPOZ\BCWSbase\sp\src" SDK_lightmappedgeneric_flashlight_ps2x.fxc-----SDK_lightmappedgeneric_flashlight_ps20b
+	echo SDK_lightmappedgeneric_flashlight_ps2x.fxc>> filestocopy.txt
+	echo common_flashlight_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo shader_constant_register_map.h>> filestocopy.txt
+	echo common_vertexlitgeneric_dx9.h>> filestocopy.txt
+	echo common_lightmappedgeneric_fxc.h>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+
+fxctmp9_tmp\SDK_lightmappedgeneric_lightingonly_overbright2_ps11.inc shaders\fxc\SDK_lightmappedgeneric_lightingonly_overbright2_ps11.vcs: SDK_lightmappedgeneric_lightingonly_overbright2_ps11.fxc 
+	perl D:\SOURCEREPOZ\BCWSbase\sp\src\devtools\bin\fxc_prep.pl   -source "D:\SOURCEREPOZ\BCWSbase\sp\src" SDK_lightmappedgeneric_lightingonly_overbright2_ps11.fxc-----SDK_lightmappedgeneric_lightingonly_overbright2_ps11
+	echo SDK_lightmappedgeneric_lightingonly_overbright2_ps11.fxc>> filestocopy.txt
+
+fxctmp9_tmp\SDK_lightmappedgeneric_lightingonly_vs11.inc shaders\fxc\SDK_lightmappedgeneric_lightingonly_vs11.vcs: SDK_lightmappedgeneric_lightingonly_vs11.fxc common_hlsl_cpp_consts.h common_pragmas.h common_vs_fxc.h common_fxc.h
+	perl D:\SOURCEREPOZ\BCWSbase\sp\src\devtools\bin\fxc_prep.pl   -source "D:\SOURCEREPOZ\BCWSbase\sp\src" SDK_lightmappedgeneric_lightingonly_vs11.fxc-----SDK_lightmappedgeneric_lightingonly_vs11
+	echo SDK_lightmappedgeneric_lightingonly_vs11.fxc>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_vs_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+
+fxctmp9_tmp\SDK_lightmappedgeneric_ps20b.inc shaders\fxc\SDK_lightmappedgeneric_ps20b.vcs: SDK_lightmappedgeneric_ps20b.fxc common_fxc.h common_flashlight_fxc.h lightmappedgeneric_ps2_3_x.h common_pragmas.h common_ps_fxc.h common_lightmappedgeneric_fxc.h common_hlsl_cpp_consts.h
+	perl D:\SOURCEREPOZ\BCWSbase\sp\src\devtools\bin\fxc_prep.pl   -source "D:\SOURCEREPOZ\BCWSbase\sp\src" SDK_lightmappedgeneric_ps20b.fxc-----SDK_lightmappedgeneric_ps20b
+	echo SDK_lightmappedgeneric_ps20b.fxc>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo common_flashlight_fxc.h>> filestocopy.txt
+	echo lightmappedgeneric_ps2_3_x.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo common_lightmappedgeneric_fxc.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+
+fxctmp9_tmp\SDK_lightmappedgeneric_ps11.inc shaders\fxc\SDK_lightmappedgeneric_ps11.vcs: SDK_lightmappedgeneric_ps11.fxc 
+	perl D:\SOURCEREPOZ\BCWSbase\sp\src\devtools\bin\fxc_prep.pl   -source "D:\SOURCEREPOZ\BCWSbase\sp\src" SDK_lightmappedgeneric_ps11.fxc-----SDK_lightmappedgeneric_ps11
+	echo SDK_lightmappedgeneric_ps11.fxc>> filestocopy.txt
+
+fxctmp9_tmp\SDK_lightmappedgeneric_vs20.inc shaders\fxc\SDK_lightmappedgeneric_vs20.vcs: SDK_lightmappedgeneric_vs20.fxc common_vs_fxc.h common_fxc.h common_hlsl_cpp_consts.h common_pragmas.h
+	perl D:\SOURCEREPOZ\BCWSbase\sp\src\devtools\bin\fxc_prep.pl   -source "D:\SOURCEREPOZ\BCWSbase\sp\src" SDK_lightmappedgeneric_vs20.fxc-----SDK_lightmappedgeneric_vs20
+	echo SDK_lightmappedgeneric_vs20.fxc>> filestocopy.txt
+	echo common_vs_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+
+fxctmp9_tmp\SDK_lightmappedreflective_ps20.inc shaders\fxc\SDK_lightmappedreflective_ps20.vcs: SDK_lightmappedreflective_ps2x.fxc common_fxc.h common_ps_fxc.h common_hlsl_cpp_consts.h common_pragmas.h
+	perl D:\SOURCEREPOZ\BCWSbase\sp\src\devtools\bin\fxc_prep.pl   -source "D:\SOURCEREPOZ\BCWSbase\sp\src" SDK_lightmappedreflective_ps2x.fxc-----SDK_lightmappedreflective_ps20
+	echo SDK_lightmappedreflective_ps2x.fxc>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+
+fxctmp9_tmp\SDK_lightmappedreflective_ps20b.inc shaders\fxc\SDK_lightmappedreflective_ps20b.vcs: SDK_lightmappedreflective_ps2x.fxc common_fxc.h common_ps_fxc.h common_hlsl_cpp_consts.h common_pragmas.h
+	perl D:\SOURCEREPOZ\BCWSbase\sp\src\devtools\bin\fxc_prep.pl   -source "D:\SOURCEREPOZ\BCWSbase\sp\src" SDK_lightmappedreflective_ps2x.fxc-----SDK_lightmappedreflective_ps20b
+	echo SDK_lightmappedreflective_ps2x.fxc>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+
+fxctmp9_tmp\SDK_lightmappedreflective_vs20.inc shaders\fxc\SDK_lightmappedreflective_vs20.vcs: SDK_lightmappedreflective_vs20.fxc common_vs_fxc.h common_fxc.h common_hlsl_cpp_consts.h common_pragmas.h
+	perl D:\SOURCEREPOZ\BCWSbase\sp\src\devtools\bin\fxc_prep.pl   -source "D:\SOURCEREPOZ\BCWSbase\sp\src" SDK_lightmappedreflective_vs20.fxc-----SDK_lightmappedreflective_vs20
+	echo SDK_lightmappedreflective_vs20.fxc>> filestocopy.txt
+	echo common_vs_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+

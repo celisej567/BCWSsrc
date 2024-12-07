@@ -23,7 +23,7 @@ setlocal
 set arg_filename=%1
 set shadercompilecommand=shadercompile.exe
 set targetdir=shaders
-set SrcDirBase=..\..
+set SrcDirBase=D:\SOURCEREPOZ\BCWSbase\sp\src
 set shaderDir=shaders
 set SDKArgs=
 set SHADERINCPATH=vshtmp9/... fxctmp9/...

@@ -41,6 +41,15 @@ class CReplayScreenshotTaker;
 	class C_FuncFakeWorldPortal;
 #endif
 
+
+enum CascadedConfigMode
+{
+	CASCADEDCONFIG_NONE = 0,
+	CASCADEDCONFIG_NORMAL,
+	CASCADEDCONFIG_SPACE
+	//CASCADEDCONFIG_FAR
+};
+
 //-----------------------------------------------------------------------------
 // Data specific to intro mode to control rendering.
 //-----------------------------------------------------------------------------
@@ -444,7 +453,7 @@ private:
 
 	// General draw methods
 	// baseDrawFlags is a combination of DF_ defines. DF_MONITOR is passed into here while drawing a monitor.
-	void			ViewDrawScene( bool bDrew3dSkybox, SkyboxVisibility_t nSkyboxVisible, const CViewSetup &view, int nClearFlags, view_id_t viewID, bool bDrawViewModel = false, int baseDrawFlags = 0, ViewCustomVisibility_t *pCustomVisibility = NULL );
+	void			ViewDrawScene(CascadedConfigMode cascadedMode, bool bDrew3dSkybox, SkyboxVisibility_t nSkyboxVisible, const CViewSetup &view, int nClearFlags, view_id_t viewID, bool bDrawViewModel = false, int baseDrawFlags = 0, ViewCustomVisibility_t *pCustomVisibility = NULL );
 
 	void			DrawMonitors( const CViewSetup &cameraView );
 
@@ -494,6 +503,8 @@ private:
 	// Sets up, cleans up the main 3D view
 	void			SetupMain3DView( const CViewSetup &view, int &nClearFlags );
 	void			CleanupMain3DView( const CViewSetup &view );
+
+	void			UpdateCascadedShadow(const CViewSetup& view, CascadedConfigMode mode);
 
 
 	// This stores the current view

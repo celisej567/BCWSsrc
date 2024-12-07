@@ -180,6 +180,20 @@ sampler ShadowDepthSampler		: register( s14 );
 sampler RandRotSampler			: register( s15 );
 #endif
 
+#if CASCADED_SHADOW
+#define g_CascadedForward         g_FlashlightPos
+
+#define g_AmbientLightIdentifier  g_FlashlightAttenuationFactors.rgb
+#define g_AmbientLightMin         g_ShadowTweaks.rgb
+#define g_AmbientLightScale       g_ShadowTweaks.a
+
+//const float4x4 g_CascadedCloseShadow	: register( c20 ); // through c23
+const float3 g_CascadedStepData : register(c15);
+
+sampler ShadowDepthSampler : register(s14);
+sampler RandRotSampler : register(s15);
+#endif
+
 struct PS_INPUT
 {
 #if SEAMLESS
@@ -202,17 +216,21 @@ struct PS_INPUT
 // CENTROID: TEXCOORD3
 	HALF4 lightmapTexCoord3			: TEXCOORD3;
 	HALF4 worldPos_projPosZ			: TEXCOORD4;
-	HALF3x3 tangentSpaceTranspose	: TEXCOORD5;
-	// tangentSpaceTranspose		: TEXCOORD6
-	// tangentSpaceTranspose		: TEXCOORD7
+#if CASCADED_SHADOW
+	float4 tangentSpaceTranspose_Row0 : TEXCOORD5;
+	float4 tangentSpaceTranspose_Row1 : TEXCOORD6;
+	float4 tangentSpaceTranspose_Row2 : TEXCOORD7;
+#endif
+
 	HALF4 vertexColor				: COLOR;
 	float4 vertexBlendX_fogFactorW	: COLOR1;
 
 	// Extra iterators on 360, used in flashlight combo
-#if defined( _X360 ) && FLASHLIGHT
+#if defined( _X360 ) && FLASHLIGHT || CASCADED_SHADOW
 	float4 flashlightSpacePos		: TEXCOORD8;
 	float4 vProjPos					: TEXCOORD9;
 #endif
+
 };
 
 #if LIGHTING_PREVIEW == 2
@@ -529,7 +547,13 @@ HALF4 main( PS_INPUT i ) : COLOR
 #endif
 
 #if 1 //CUBEMAP || LIGHTING_PREVIEW || ( defined( _X360 ) && FLASHLIGHT )
+#if CASCADED_SHADOW
+	float3x3 tangentSpaceTranspose = float3x3(i.tangentSpaceTranspose_Row0.xyz,
+		i.tangentSpaceTranspose_Row1.xyz,
+		i.tangentSpaceTranspose_Row2.xyz);
+#else
 	float3x3 tangentSpaceTranspose = i.tangentSpaceTranspose;
+#endif
 	
 	float3 worldSpaceNormal = mul( vNormal.xyz, i.tangentSpaceTranspose );
 #endif
@@ -542,8 +566,38 @@ HALF4 main( PS_INPUT i ) : COLOR
 	float3 vEyeDir = normalize( worldVertToEyeVector );
 	float flFresnelMinlight = saturate( dot( worldSpaceNormal, vEyeDir ) );
 
+
+#if CASCADED_SHADOW
+	float4 closePosition = i.flashlightSpacePos; //mul( float4( i.worldPos_projPosZ.xyz, 1.0f ), g_CascadedCloseShadow );
+	//closePosition.xyz /= closePosition.w;
+	float4 vProjPos = float4(i.tangentSpaceTranspose_Row0.w, i.tangentSpaceTranspose_Row1.w,
+		i.worldPos_projPosZ.w, i.tangentSpaceTranspose_Row2.w);
+
+	float flShadow = 1.0 - DoCascadedShadow(ShadowDepthSampler, RandRotSampler, worldSpaceNormal,
+		g_CascadedForward, closePosition, i.worldPos_projPosZ.xyz, FLASHLIGHTDEPTHFILTERMODE, g_CascadedStepData,
+		vProjPos.xy / vProjPos.z, float4(0.0005, 0.0, 0.0, 0.0));
+
+	float3 lightDelta = diffuseLighting - g_AmbientLightMin;
+	lightDelta -= dot(g_AmbientLightIdentifier, lightDelta) * g_AmbientLightIdentifier;
+	float flShadowMask = lightDelta.x * lightDelta.x + lightDelta.y * lightDelta.y + lightDelta.z * lightDelta.z;
+	flShadowMask = 1.0f - saturate(flShadowMask * g_AmbientLightScale);
+
+	//float flShadowMask = 1.0f - saturate( length( cross( g_AmbientLightIdentifier, diffuseLighting - g_AmbientLightMin ) )
+	//	* g_AmbientLightScale );
+
+	diffuseLighting = min(diffuseLighting, lerp(diffuseLighting, g_AmbientLightMin, flShadow * flShadowMask));
+#endif
+
+
+
 	float3 diffuseComponent = albedo.xyz * lerp( diffuseLighting, 1, g_fMinLighting * flFresnelMinlight );
 #endif
+
+
+
+
+
+
 
 
 #if defined( _X360 ) && FLASHLIGHT

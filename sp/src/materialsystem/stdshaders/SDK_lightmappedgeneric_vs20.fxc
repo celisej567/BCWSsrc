@@ -8,6 +8,12 @@
 //  STATIC: "SEAMLESS"                  "0..1"
 //  STATIC: "BUMPMASK"                  "0..1"
 //	STATIC: "FLASHLIGHT"				"0..1"	[XBOX]
+
+
+// DYNAMIC: "CASCADED_SHADOW"		"0..1" [vs30]
+//  SKIP: $CASCADED_SHADOW && $FLASHLIGHT
+
+
 //  STATIC: "BASETEXTURETRANSFORM2"		"0..1"
 
 //  DYNAMIC: "FASTPATH"					"0..1"
@@ -22,6 +28,9 @@
 //  SKIP: $SEAMLESS && $RELIEF_MAPPING
 //  SKIP: $BUMPMASK && $RELIEF_MAPPING
 //  SKIP: $BUMPMASK && $SEAMLESS
+
+// SKIP: $CASCADED_SHADOW && $LIGHTING_PREVIEW
+// SKIP: !$TANGENTSPACE
 
 #include "common_vs_fxc.h"
 
@@ -89,16 +98,25 @@ struct VS_OUTPUT
 	float4 lightmapTexCoord3		: TEXCOORD3;			// and basetexcoord*mask_scale
 	float4 worldPos_projPosZ		: TEXCOORD4;
 
-#if TANGENTSPACE || (LIGHTING_PREVIEW) || defined( _X360 )
-	float3x3 tangentSpaceTranspose	: TEXCOORD5;	// and 6 and 7
+#if CASCADED_SHADOW
+	float4 tangentSpaceTranspose_Row0	: TEXCOORD5;
+	float4 tangentSpaceTranspose_Row1	: TEXCOORD6;
+	float4 tangentSpaceTranspose_Row2	: TEXCOORD7;
 #endif
+
+#if TANGENTSPACE || (LIGHTING_PREVIEW) || defined( _X360 )
+
 
 	float4 vertexColor				: COLOR;				// in seamless, r g b = blend weights
 	float4 vertexBlendX_fogFactorW	: COLOR1;
 
 	// Extra iterators on 360, used in flashlight combo
-#if defined( _X360 ) && FLASHLIGHT
+#if FLASHLIGHT || CASCADED_SHADOW
 	float4 flashlightSpacePos		: TEXCOORD8;
+#endif
+
+#if defined( _X360 ) && FLASHLIGHT || CASCADED_SHADOW
+	//float4 flashlightSpacePos		: TEXCOORD8;
 	float4 vProjPos					: TEXCOORD9;
 #endif
 
@@ -128,14 +146,30 @@ VS_OUTPUT main( const VS_INPUT v )
 	#if SEAMLESS && BUMPMAP && defined( _X360 )
 		float3 n = normalize( worldNormal );
 		float3 n2 = n * n;           // sums to 1.
-
-		o.tangentSpaceTranspose[0] = normalize( float3( n2.y + n2.z, 0.0f, n2.x ) );
-		o.tangentSpaceTranspose[1] = normalize( float3( 0.0f, n2.x + n2.z, n2.y ) );
-		o.tangentSpaceTranspose[2] = worldNormal;
+		#if CASCADED_SHADOW
+			o.tangentSpaceTranspose_Row0.xyz = normalize( float3( n2.y + n2.z, 0.0f, n2.x ) );
+			o.tangentSpaceTranspose_Row1.xyz = normalize( float3( 0.0f, n2.x + n2.z, n2.y ) );
+			o.tangentSpaceTranspose_Row2.xyz = worldNormal;
+		#else
+			o.tangentSpaceTranspose[0] = normalize( float3( n2.y + n2.z, 0.0f, n2.x ) );
+			o.tangentSpaceTranspose[1] = normalize( float3( 0.0f, n2.x + n2.z, n2.y ) );
+			o.tangentSpaceTranspose[2] = worldNormal;
+		#endif
 	#else
-		o.tangentSpaceTranspose[0] = worldTangentS;
-		o.tangentSpaceTranspose[1] = worldTangentT;
-		o.tangentSpaceTranspose[2] = worldNormal;
+		#if CASCADED_SHADOW
+			o.tangentSpaceTranspose_Row0.xyz = worldTangentS;
+			o.tangentSpaceTranspose_Row1.xyz = worldTangentT;
+			o.tangentSpaceTranspose_Row2.xyz = worldNormal;
+		#else
+			o.tangentSpaceTranspose[0] = worldTangentS;
+			o.tangentSpaceTranspose[1] = worldTangentT;
+			o.tangentSpaceTranspose[2] = worldNormal;
+		#endif
+	#endif
+	#if CASCADED_SHADOW
+		o.tangentSpaceTranspose_Row0.w = o.projPos.x;
+		o.tangentSpaceTranspose_Row1.w = o.projPos.y;
+		o.tangentSpaceTranspose_Row2.w = o.projPos.w;
 	#endif
 
 #endif
@@ -254,6 +288,11 @@ VS_OUTPUT main( const VS_INPUT v )
 #endif
 
 // On 360, we have extra iterators and can fold the flashlight into this shader
+
+#if FLASHLIGHT || CASCADED_SHADOW
+	o.flashlightSpacePos = mul( float4( worldPos, 1.0f ), g_FlashlightWorldToTexture );
+#endif	
+
 #if defined( _X360 ) && FLASHLIGHT
 	o.flashlightSpacePos = mul( float4( worldPos, 1.0f ), g_FlashlightWorldToTexture );
 	o.vProjPos = vProjPos;

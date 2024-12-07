@@ -256,6 +256,16 @@ $Project
 		
 		//$File	"c_env_cascade_light.cpp"
 		//$File	"C_Env_Cascade_Light.h"
+		
+		$Folder "GString"
+		{
+			$File "gstring/c_lights.cpp"
+			$File "gstring/c_lights.h"
+			
+			$File "gstring/c_gstring_util.cpp"
+			$File "gstring/c_gstring_util.h"
+		}
+		
 		$File	"hl2\C_Func_Monitor.cpp"
 		$File	"geiger.cpp"
 		$File	"history_resource.cpp"

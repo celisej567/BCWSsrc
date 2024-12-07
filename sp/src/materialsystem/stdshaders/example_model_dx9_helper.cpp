@@ -242,11 +242,14 @@ void DrawExampleModel_DX9_Internal( CBaseVSShader *pShader, IMaterialVar** param
 			bWriteWaterFogToAlpha = (fogType == MATERIAL_FOG_LINEAR_BELOW_FOG_Z);
 			AssertMsg( !(bWriteDepthToAlpha && bWriteWaterFogToAlpha), "Can't write two values to alpha at the same time." );
 		}
+		//ITexture* pCascadedDepthTexture = bHasFlashlight ? NULL : (ITexture*)pShaderAPI->GetIntRenderingParameter(INT_CASCADED_DEPTHTEXTURE);
+		//const int iCascadedShadowCombo = (pCascadedDepthTexture != NULL) ? 1 : 0;
 
 		DECLARE_DYNAMIC_VERTEX_SHADER( example_model_vs20 );
 		SET_DYNAMIC_VERTEX_SHADER_COMBO( DOWATERFOG, fogIndex );
 		SET_DYNAMIC_VERTEX_SHADER_COMBO( SKINNING, numBones > 0 );
 		SET_DYNAMIC_VERTEX_SHADER_COMBO( LIGHTING_PREVIEW, pShaderAPI->GetIntRenderingParameter(INT_RENDERPARM_ENABLE_FIXED_LIGHTING)!=0);
+		//SET_DYNAMIC_VERTEX_SHADER_COMBO(CASCADED_SHADOW, iCascadedShadowCombo);
 		SET_DYNAMIC_VERTEX_SHADER_COMBO( COMPRESSED_VERTS, (int)vertexCompression );
 		SET_DYNAMIC_VERTEX_SHADER_COMBO( NUM_LIGHTS, lightState.m_nNumLights );
 		SET_DYNAMIC_VERTEX_SHADER( example_model_vs20 );

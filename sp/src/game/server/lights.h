@@ -45,13 +45,35 @@ private:
 	char	m_iTargetFade;
 };
 
-class CEnvLight : public CLight
+class CEnvLight : public CBaseEntity
 {
 public:
-	DECLARE_CLASS(CEnvLight, CLight);
+	DECLARE_CLASS(CEnvLight, CBaseEntity);
+	DECLARE_NETWORKCLASS();
+	DECLARE_DATADESC();
 
-	bool	KeyValue(const char* szKeyName, const char* szValue);
-	void	Spawn(void);
+	CEnvLight();
+
+	virtual bool KeyValue(const char* szKeyName, const char* szValue);
+	virtual void Spawn();
+
+	virtual int ObjectCaps()
+	{
+		return BaseClass::ObjectCaps() & ~FCAP_ACROSS_TRANSITION;
+	}
+
+	virtual int UpdateTransmitState()
+	{
+		return SetTransmitState(FL_EDICT_ALWAYS);
+	}
+
+private:
+	CNetworkQAngle(m_angSunAngles);
+	CNetworkVector(m_vecLight);
+	CNetworkVector(m_vecAmbient);
+	CNetworkVar(bool, m_bCascadedShadowMappingEnabled);
+	bool m_bHasHDRLightSet;
+	bool m_bHasHDRAmbientSet;
 };
 
 #endif // LIGHTS_H
